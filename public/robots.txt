@@ -1,0 +1,9 @@
+# Robots.txt for Casa dos Filhos
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://casa-dos-filhos.netlify.app/sitemap-index.xml
+
+# LLM / AI Search Crawlers (GEO - Generative Engine Optimization)
+# https://casa-dos-filhos.netlify.app/llms.txt

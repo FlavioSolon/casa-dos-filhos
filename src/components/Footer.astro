@@ -10,35 +10,42 @@ const t = useTranslations(lang);
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="bg-slate-950 text-white pt-16 pb-12 border-t border-slate-800">
+<footer class="bg-slate-950 text-white pt-16 pb-12 border-t border-slate-800" itemscope itemtype="https://schema.org/NGO">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Top Grid: Bio, Quick Links, Contacts -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 pb-12 border-b border-slate-800">
       <!-- Col 1: Brand & Bio -->
       <div class="lg:col-span-5 space-y-4">
         <div class="flex items-center gap-3">
           <div class="w-12 h-12 relative shrink-0">
-            <img src="/images/logo.svg" alt="Casa dos Filhos" class="w-full h-full object-contain" width="48" height="48" />
+            <img src="/images/logo.svg" alt="Casa dos Filhos" class="w-full h-full object-contain" width="48" height="48" itemprop="logo" />
           </div>
           <div>
-            <span class="text-xl font-black text-white block">Casa dos Filhos</span>
+            <span class="text-xl font-black text-white block" itemprop="name">Casa dos Filhos</span>
             <span class="text-xs font-bold text-rose-400 block uppercase tracking-wider">Manaus • Amazonas</span>
           </div>
         </div>
 
-        <p class="text-sm text-slate-400 leading-relaxed max-w-md font-medium">
+        <p class="text-sm text-slate-400 leading-relaxed max-w-md font-medium" itemprop="description">
           {t('footer.description')}
         </p>
 
-        <div class="p-3.5 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs text-slate-300 space-y-1">
+        <!-- Semantic Address and Tax ID Box -->
+        <address class="not-italic p-4 bg-slate-900/90 rounded-2xl border border-slate-800 text-xs text-slate-300 space-y-1.5 block" itemprop="address" itemscope itemtype="https://schema.org/PostalAddress">
           <div class="font-bold text-white flex items-center gap-1.5">
             <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
             </svg>
             <span>{t('footer.verifiedNgo')}</span>
           </div>
-          <p class="font-mono text-slate-400">CNPJ: 50.842.391/0001-60</p>
-          <p class="text-slate-400">{t('footer.address')}</p>
-        </div>
+          <p class="font-mono text-slate-400">CNPJ: <span itemprop="taxID">50.842.391/0001-60</span></p>
+          <p class="text-slate-300">
+            <span itemprop="addressLocality">Manaus</span>, 
+            <span itemprop="addressRegion">Amazonas</span> - 
+            <span itemprop="addressCountry">Brasil</span> • CEP: 
+            <span itemprop="postalCode">69097-122</span>
+          </p>
+        </address>
       </div>
 
       <!-- Col 2: Quick Links -->
@@ -48,6 +55,7 @@ const currentYear = new Date().getFullYear();
         </h4>
         <ul class="space-y-2.5 text-sm text-slate-300 font-medium">
           <li><a href="#sobre" class="hover:text-white transition-colors">{t('nav.about')}</a></li>
+          <li><a href="#metodologia" class="hover:text-white transition-colors">{lang === 'pt' ? 'Metodologia' : 'Methodology'}</a></li>
           <li><a href="#atividades" class="hover:text-white transition-colors">{t('nav.activities')}</a></li>
           <li><a href="#impacto" class="hover:text-white transition-colors">{t('nav.impact')}</a></li>
           <li><a href="#dados-bancarios" class="hover:text-white transition-colors">{t('nav.transparency')}</a></li>
@@ -63,10 +71,10 @@ const currentYear = new Date().getFullYear();
         </h4>
         
         <div class="space-y-3 text-sm">
+          <!-- WhatsApp & Phone Link with E.164 +55 Format -->
           <a
-            href="https://wa.me/5592991764615?text=Ol%C3%A1%2C+gostaria+de+apoiar+a+Casa+dos+Filhos"
-            target="_blank"
-            rel="noopener noreferrer"
+            href="tel:+5592991764615"
+            itemprop="telephone"
             class="flex items-center gap-3 p-3 rounded-2xl bg-slate-900 border border-slate-800 hover:border-emerald-500/50 hover:bg-slate-850 transition-all text-slate-200"
           >
             <div class="w-8 h-8 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
@@ -75,15 +83,17 @@ const currentYear = new Date().getFullYear();
               </svg>
             </div>
             <div>
-              <span class="block text-xs text-slate-400 font-bold">WhatsApp Oficial</span>
-              <span class="font-semibold text-white">(92) 99176-4615</span>
+              <span class="block text-xs text-slate-400 font-bold">Telefone / WhatsApp</span>
+              <span class="font-semibold text-white">+55 (92) 99176-4615</span>
             </div>
           </a>
 
+          <!-- Instagram Link -->
           <a
             href="https://www.instagram.com/casadosfilhos/"
             target="_blank"
             rel="noopener noreferrer"
+            itemprop="sameAs"
             class="flex items-center gap-3 p-3 rounded-2xl bg-slate-900 border border-slate-800 hover:border-rose-500/50 hover:bg-slate-850 transition-all text-slate-200"
           >
             <div class="w-8 h-8 rounded-xl bg-rose-500/20 text-rose-400 flex items-center justify-center shrink-0">
@@ -185,7 +195,7 @@ const currentYear = new Date().getFullYear();
       </div>
 
       <div class="flex items-center gap-4">
-        <span>Manaus/AM - Brasil</span>
+        <span>Manaus/AM, Brasil</span>
         <span>•</span>
         <a href="#sobre" class="hover:text-slate-200 transition-colors">Voltar ao topo ↑</a>
       </div>

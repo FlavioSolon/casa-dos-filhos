@@ -9,6 +9,7 @@ export const ui = {
   pt: {
     // Nav
     'nav.about': 'Sobre Nós',
+    'nav.methodology': 'Nossa Metodologia',
     'nav.activities': 'Nossas Atividades',
     'nav.impact': 'O Que Construímos',
     'nav.transparency': 'Transparência Bancária',
@@ -122,20 +123,22 @@ export const ui = {
     'faq.q1': 'Como meu dinheiro é utilizado?',
     'faq.a1': '100% dos valores arrecadados são destinados diretamente à manutenção das atividades da Casa dos Filhos em Manaus: compra de alimentos para refeições diárias, aquisição de materiais escolares, kimonos de jiu-jitsu, sapatilhas de balé, manutenção do espaço físico e apoio às famílias em extrema vulnerabilidade.',
     'faq.q2': 'Posso visitar a Casa dos Filhos em Manaus?',
-    'faq.a2': 'Sim! Nossas portas estão sempre abertas para quem deseja conhecer de perto nosso projeto e ver a alegria das crianças. Recomendamos agendar sua visita pelo nosso WhatsApp institucional para que possamos recebê-lo com todo carinho.',
+    'faq.a2': 'Sim! Nossas portas estão sempre abertas para quem deseja conhecer de perto nosso projeto e ver a alegria das crianças. Recomendamos agendar sua visita pelo nosso WhatsApp institucional (+55 92 99176-4615) para que possamos recebê-lo com todo carinho.',
     'faq.q3': 'Como doar sendo residente no exterior?',
     'faq.a3': 'Doadores internacionais podem contribuir através de transferências bancárias internacionais (utilizando os dados SWIFT/IBAN do Banco Sicoob) ou entrando em contato direto pelo WhatsApp de suporte internacional (+55 92 99176-4615) para obter auxílio passo a passo.',
     'faq.q4': 'Posso ser voluntário ou doar alimentos e materiais físicos?',
     'faq.a4': 'Com certeza! Aceitamos doações presenciais de alimentos não perecíveis, brinquedos, roupas infantis, materiais didáticos e kimonos. Se você deseja ser um voluntário em aulas ou atividades recreativas, envie uma mensagem no nosso WhatsApp!',
     'faq.q5': 'A Casa dos Filhos emite recibo ou comprovante?',
     'faq.a5': 'Sim! Como pessoa jurídica devidamente inscrita no CNPJ 50.842.391/0001-60, emitimos comprovantes e recibos de doação para pessoas físicas e empresas parceiras mediante envio do comprovante pelo WhatsApp.',
+    'faq.q6': 'Como funciona o acompanhamento pedagógico das crianças?',
+    'faq.a6': 'Nossa equipe avalia individualmente as necessidades de aprendizagem de cada criança no contraturno escolar, trabalhando lacunas de alfabetização, reforço em matemática e leitura, além de proporcionar estímulo intelectual contínuo através de aulas de idiomas e oficinas de xadrez.',
 
     // Footer
     'footer.description': 'A Casa dos Filhos é uma organização social sem fins lucrativos sediada em Manaus/AM, dedicada a acolher, educar e transformar a vida de crianças e suas famílias através do amor em ação.',
     'footer.address': 'Manaus, Amazonas - Brasil • CEP 69097-122',
     'footer.quickLinks': 'Links Rápidos',
     'footer.contact': 'Contato Direto',
-    'footer.whatsapp': 'WhatsApp: (92) 99176-4615',
+    'footer.whatsapp': 'WhatsApp: +55 (92) 99176-4615',
     'footer.instagram': 'Instagram: @casadosfilhos',
     'footer.verifiedNgo': 'Organização da Sociedade Civil Verificada',
     'footer.copyright': '© {year} Casa dos Filhos. Todos os direitos reservados. Feito com amor por um futuro melhor.',
@@ -144,6 +147,7 @@ export const ui = {
   en: {
     // Nav
     'nav.about': 'About Us',
+    'nav.methodology': 'Our Methodology',
     'nav.activities': 'Our Activities',
     'nav.impact': 'What We Build',
     'nav.transparency': 'Banking Transparency',
@@ -257,13 +261,15 @@ export const ui = {
     'faq.q1': 'How is my donation used?',
     'faq.a1': '100% of the funds raised go directly to running Casa dos Filhos activities in Manaus: purchasing daily meals, school supplies, jiu-jitsu gis, ballet shoes, center maintenance, and emergency food baskets for families in extreme poverty.',
     'faq.q2': 'Can I visit Casa dos Filhos in Manaus?',
-    'faq.a2': 'Yes! Our doors are always open to visitors who want to see our work firsthand and meet the children. Please schedule your visit through our WhatsApp so we can welcome you warmly.',
+    'faq.a2': 'Yes! Our doors are always open to visitors who want to see our work firsthand and meet the children. Please schedule your visit through our WhatsApp (+55 92 99176-4615) so we can welcome you warmly.',
     'faq.q3': 'How can I donate from outside Brazil?',
     'faq.a3': 'International donors can contribute via direct international bank wire (using Sicoob SWIFT/IBAN coordinates) or reach out directly to our international coordination WhatsApp (+55 92 99176-4615) for immediate guidance.',
     'faq.q4': 'Can I volunteer or donate physical supplies?',
     'faq.a4': 'Absolutely! We gratefully accept in-person donations of non-perishable food, books, children’s clothing, and sports equipment. If you would like to volunteer as a teacher or mentor, reach out via WhatsApp!',
     'faq.q5': 'Does Casa dos Filhos provide donation receipts?',
     'faq.a5': 'Yes! As a legally registered non-profit organization (CNPJ 50.842.391/0001-60), we provide official donation receipts for individuals and corporate partners.',
+    'faq.q6': 'How does educational tutoring work for the children?',
+    'faq.a6': 'Our volunteer educators assess each student individually in after-school sessions, reinforcing literacy, reading comprehension, mathematics, languages (English/Spanish), and cognitive development through chess workshops.',
 
     // Footer
     'footer.description': 'Casa dos Filhos is a registered non-profit organization located in Manaus/AM, dedicated to loving, educating, and transforming the lives of vulnerable children and their families in the Amazon.',

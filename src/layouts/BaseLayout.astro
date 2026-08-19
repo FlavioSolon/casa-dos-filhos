@@ -13,36 +13,73 @@ interface Props {
 const {
   lang = 'pt',
   title = lang === 'pt'
-    ? 'Casa dos Filhos (@casadosfilhos) | Apoie Crianças em Manaus/AM'
-    : 'Casa dos Filhos | Support Vulnerable Children in Manaus, Amazon',
+    ? 'Casa dos Filhos | Apoie Crianças em Manaus/AM'
+    : 'Casa dos Filhos | Support Children in Manaus',
   description = lang === 'pt'
-    ? 'Acolhendo, amando e cuidando. Doe para a Casa dos Filhos em Manaus/AM e transforme vidas através de educação, esportes, alimentação balanceada e acolhimento diário.'
-    : 'Empower vulnerable children in Manaus, Amazon. Support Casa dos Filhos through education, sports, nutrition, and loving daily care. Donate via PIX or bank transfer.',
-  canonicalUrl = `https://casadosfilhos.org/${lang}`
+    ? 'Doe para a Casa dos Filhos em Manaus/AM e transforme vidas através de educação, esporte, alimentação saudável e acolhimento diário.'
+    : 'Support Casa dos Filhos in Manaus, Brazil. Transform children\'s lives through education, sports, nutrition, and loving daily care.',
+  canonicalUrl = `https://casa-dos-filhos.netlify.app/${lang}`
 } = Astro.props;
 
-const siteUrl = 'https://casadosfilhos.org';
+const siteUrl = 'https://casa-dos-filhos.netlify.app';
 const ogImage = `${siteUrl}/images/hero-kids.jpg`;
 
 const jsonLd = {
   "@context": "https://schema.org",
-  "@type": "NGO",
-  "name": "Casa dos Filhos",
-  "description": "Projeto social em Manaus acolhendo, amando e cuidando de crianças através de educação, esporte e alimentação.",
-  "taxID": "50.842.391/0001-60",
-  "url": siteUrl,
-  "logo": `${siteUrl}/images/logo.svg`,
-  "image": ogImage,
-  "telephone": "+5592991764615",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Manaus",
-    "addressRegion": "AM",
-    "postalCode": "69097-122",
-    "addressCountry": "BR"
-  },
-  "sameAs": [
-    "https://www.instagram.com/casadosfilhos/"
+  "@graph": [
+    {
+      "@type": ["NGO", "LocalBusiness", "NonprofitOrganization"],
+      "@id": `${siteUrl}/#organization`,
+      "name": "Casa dos Filhos",
+      "alternateName": "@casadosfilhos",
+      "legalName": "CASA DOS FILHOS",
+      "taxID": "50.842.391/0001-60",
+      "url": siteUrl,
+      "logo": `${siteUrl}/images/logo.svg`,
+      "image": ogImage,
+      "description": "Organização sem fins lucrativos em Manaus/AM acolhendo crianças em vulnerabilidade social através de educação, esportes, nutrição e apoio sociofamiliar.",
+      "telephone": "+55-92-99176-4615",
+      "email": "contato@casadosfilhos.org",
+      "priceRange": "$",
+      "currenciesAccepted": "BRL, USD, EUR",
+      "paymentAccepted": "PIX, Direct Bank Transfer (Sicoob)",
+      "openingHours": "Mo-Fr 08:00-17:00",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Zona Norte",
+        "addressLocality": "Manaus",
+        "addressRegion": "AM",
+        "postalCode": "69097-122",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -3.1190275,
+        "longitude": -60.0217314
+      },
+      "areaServed": {
+        "@type": "City",
+        "name": "Manaus",
+        "containedInPlace": {
+          "@type": "State",
+          "name": "Amazonas"
+        }
+      },
+      "sameAs": [
+        "https://www.instagram.com/casadosfilhos/",
+        "https://wa.me/5592991764615"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}/#website`,
+      "url": siteUrl,
+      "name": "Casa dos Filhos",
+      "publisher": {
+        "@id": `${siteUrl}/#organization`
+      },
+      "inLanguage": ["pt-BR", "en-US"]
+    }
   ]
 };
 ---
@@ -55,12 +92,12 @@ const jsonLd = {
     <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Primary Meta Tags -->
+    <!-- Primary Meta Tags (Strict 50-60 chars title, 120-160 chars description) -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content="Casa dos Filhos" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href={canonicalUrl} />
 
     <!-- Hreflang Tags -->
@@ -84,12 +121,18 @@ const jsonLd = {
     <meta property="twitter:description" content={description} />
     <meta property="twitter:image" content={ogImage} />
 
+    <!-- Geographic Micro-tags for Local SEO (Manaus, Amazonas) -->
+    <meta name="geo.region" content="BR-AM" />
+    <meta name="geo.placename" content="Manaus" />
+    <meta name="geo.position" content="-3.119028;-60.021731" />
+    <meta name="ICBM" content="-3.119028, -60.021731" />
+
     <!-- Fonts: Google Fonts Plus Jakarta Sans preconnected -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" />
 
-    <!-- Schema.org JSON-LD Structured Data -->
+    <!-- Schema.org JSON-LD Structured Data (LocalBusiness + NGO) -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="min-h-screen flex flex-col bg-[#FAFAFA] text-slate-900 selection:bg-rose-100 selection:text-rose-900">

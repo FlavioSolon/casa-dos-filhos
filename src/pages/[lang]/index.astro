@@ -1,6 +1,7 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Hero from '../../components/Hero.astro';
+import AboutMission from '../../components/AboutMission.astro';
 import ImpactMetrics from '../../components/ImpactMetrics.astro';
 import ActivitiesGrid from '../../components/ActivitiesGrid.astro';
 import BankDetailsCard from '../../components/BankDetailsCard.astro';
@@ -19,6 +20,7 @@ const { lang } = Astro.params as { lang: 'pt' | 'en' };
 
 <BaseLayout lang={lang}>
   <Hero lang={lang} />
+  <AboutMission lang={lang} />
   <ImpactMetrics lang={lang} />
   <ActivitiesGrid lang={lang} />
   <BankDetailsCard lang={lang} />

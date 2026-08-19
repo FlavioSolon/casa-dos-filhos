@@ -1,0 +1,108 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: 'pt' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="metodologia" class="py-20 bg-white border-b border-slate-200/80 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+      <!-- Left Column: Story & Methodology -->
+      <div class="lg:col-span-7 space-y-6">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-800 text-xs font-black uppercase tracking-wider">
+          <span>{lang === 'pt' ? 'NOSSA METODOLOGIA & COMPROMISSO' : 'OUR METHODOLOGY & COMMITMENT'}</span>
+        </div>
+
+        <h2 class="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight leading-tight">
+          {lang === 'pt'
+            ? 'Como atuamos no combate à vulnerabilidade social infantil em Manaus'
+            : 'How we tackle child social vulnerability in Manaus, Amazon'}
+        </h2>
+
+        <div class="space-y-4 text-slate-600 text-base sm:text-lg leading-relaxed font-medium">
+          <p>
+            {lang === 'pt'
+              ? 'A Casa dos Filhos nasceu com o propósito inegociável de oferecer acolhimento, proteção e oportunidades reais de desenvolvimento para crianças e adolescentes em Manaus, capital do Amazonas. Compreendemos que a educação e o afeto são os alicerces mais poderosos para romper ciclos de vulnerabilidade socioeconômica.'
+              : 'Casa dos Filhos was founded with a clear purpose: to offer shelter, protection, and real opportunities for children and teenagers in Manaus, Amazonas. We understand that quality education, balanced nutrition, and genuine love are the most powerful catalysts to break cycles of poverty.'}
+          </p>
+          <p>
+            {lang === 'pt'
+              ? 'No contraturno escolar, nossas crianças encontram um refúgio seguro onde recebem acompanhamento pedagógico personalizado, aulas de idiomas, oficinas de raciocínio lógico com xadrez e práticas esportivas disciplinadoras como o Jiu-Jitsu e o Balé Clássico. Cada atividade é planejada para despertar o potencial criativo, intelectual e físico dos nossos alunos.'
+              : 'During after-school hours, our children find a safe sanctuary where they receive individualized academic tutoring, language classes, strategic chess training, and disciplined athletic arts like Brazilian Jiu-Jitsu and Ballet. Every single activity is designed to awaken intellectual, creative, and physical potential.'}
+          </p>
+        </div>
+
+        <!-- 3 Highlights List -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-2">
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <span class="text-rose-900 font-black text-lg block">100% Gratuito</span>
+            <span class="text-xs text-slate-600 font-semibold mt-1 block">
+              {lang === 'pt' ? 'Acesso universal sem custos para as famílias atendidas' : 'Full free access for all registered assisted families'}
+            </span>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <span class="text-emerald-700 font-black text-lg block">Nutrição Diária</span>
+            <span class="text-xs text-slate-600 font-semibold mt-1 block">
+              {lang === 'pt' ? 'Mais de 1.200 refeições balanceadas por mês' : 'Over 1,200 nutritious hot meals served monthly'}
+            </span>
+          </div>
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80">
+            <span class="text-amber-600 font-black text-lg block">Ética & Cidadania</span>
+            <span class="text-xs text-slate-600 font-semibold mt-1 block">
+              {lang === 'pt' ? 'Formação de caráter, respeito e convivência pacífica' : 'Character building, respect, and peaceful coexistence'}
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Transparency and Community Reach Box -->
+      <div class="lg:col-span-5 bg-gradient-to-br from-rose-900 via-rose-950 to-slate-950 text-white rounded-3xl p-8 sm:p-10 shadow-2xl border border-rose-800/40 space-y-6 relative overflow-hidden">
+        <div class="absolute -right-10 -bottom-10 w-48 h-48 bg-rose-500/20 rounded-full blur-2xl pointer-events-none"></div>
+
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-amber-300">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-black text-white">
+            {lang === 'pt' ? 'Compromisso com a Transparência' : 'Commitment to Transparency'}
+          </h3>
+        </div>
+
+        <p class="text-sm text-rose-100 leading-relaxed font-medium">
+          {lang === 'pt'
+            ? 'Todos os recursos recebidos através de doações via PIX ou transferências bancárias são auditados e destinados integralmente para a manutenção da sede, compra de insumos alimentares, material didático e suporte emergencial às famílias cadastradas.'
+            : 'All funds received via PIX or bank transfers are strictly accounted for and invested in center operations, fresh nutritional food supplies, learning materials, and emergency family baskets.'}
+        </p>
+
+        <div class="p-4 bg-white/10 rounded-2xl border border-white/15 space-y-2 text-xs">
+          <div class="flex justify-between items-center text-rose-200">
+            <span class="font-medium">{lang === 'pt' ? 'Entidade Cadastrada:' : 'Registered Entity:'}</span>
+            <span class="font-bold text-white">CASA DOS FILHOS</span>
+          </div>
+          <div class="flex justify-between items-center text-rose-200">
+            <span class="font-medium">{lang === 'pt' ? 'CNPJ Oficial:' : 'Official Tax ID:'}</span>
+            <span class="font-mono font-bold text-amber-300">50.842.391/0001-60</span>
+          </div>
+          <div class="flex justify-between items-center text-rose-200">
+            <span class="font-medium">{lang === 'pt' ? 'Sede:' : 'Headquarters:'}</span>
+            <span class="font-bold text-white">Manaus - AM, Brasil</span>
+          </div>
+        </div>
+
+        <a
+          href="#doar"
+          class="block text-center w-full py-3.5 px-6 rounded-2xl bg-amber-400 hover:bg-amber-300 text-slate-950 font-black text-sm shadow-md transition-colors"
+        >
+          {lang === 'pt' ? 'Apoiar Nossos Projetos' : 'Support Our Programs'}
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

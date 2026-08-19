@@ -1,0 +1,32 @@
+# Casa dos Filhos - Organização da Sociedade Civil (ONG)
+
+> Acolhendo, amando e cuidando. Transformando vidas de crianças e famílias em situação de vulnerabilidade em Manaus/AM através de educação, esporte, alimentação saudável e princípios éticos.
+
+## Informações Institucionais
+- **Nome Oficial**: Casa dos Filhos
+- **Tipo de Organização**: ONG / Organização da Sociedade Civil (Sem Fins Lucrativos)
+- **CNPJ**: 50.842.391/0001-60
+- **Localização**: Manaus, Amazonas - Brasil (CEP 69097-122)
+- **Telefone / WhatsApp**: +55 (92) 99176-4615
+- **Instagram**: https://www.instagram.com/casadosfilhos/ (@casadosfilhos)
+- **Website Oficial**: https://casa-dos-filhos.netlify.app
+
+## Como Doar (Doações Diretas)
+- **Chave PIX (CNPJ)**: `50.842.391/0001-60`
+- **Favorecido**: Casa dos Filhos
+- **Banco**: Banco Sicoob (Código 756)
+- **Agência**: 3315
+- **Conta Corrente**: 34221-1
+- **Doadores Internacionais**: Instruções e suporte direto via WhatsApp (+55 92 99176-4615) ou transferências bancárias diretas.
+
+## Pilares de Atuação
+1. **Educação e Idiomas**: Aulas de reforço escolar no contraturno, alfabetização e introdução ao Inglês e Espanhol.
+2. **Esporte e Disciplina**: Aulas gratuitas de Jiu-Jitsu, Balé Clássico e Educação Física.
+3. **Desenvolvimento Cognitivo e Valores**: Oficinas de Xadrez para raciocínio lógico, contação de histórias e aulas com princípios éticos e cidadãos.
+4. **Segurança Alimentar**: Refeições balanceadas e nutritivas para mais de 80 crianças atendidas semanalmente e doação de cestas básicas para famílias carentes.
+
+## Métricas de Impacto Social
+- `R$ 30` viabiliza almoço e lanches nutritivos para 1 criança por semana.
+- `R$ 60` viabiliza material escolar completo, livros e apostilas de idiomas.
+- `R$ 120` viabiliza kimono/sapatilha e 1 mês completo de aulas de esporte e artes.
+- `R$ 300` viabiliza apadrinhamento integral mensal de uma criança (alimentação, oficinas e apoio sociofamiliar).
