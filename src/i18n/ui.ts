@@ -19,9 +19,9 @@ export const ui = {
 
     // Hero
     'hero.badge': 'PROJETO SOCIAL VERIFICADO • MANAUS/AM',
-    'hero.title': 'Transforme o futuro de dezenas de crianças em Manaus através do amor e da educação.',
-    'hero.subtitle': 'Oferecemos educação complementar, esporte, alimentação balanceada e acolhimento diário para crianças em situação de vulnerabilidade social no coração da Amazônia.',
-    'hero.slogan': '"Acolhendo, amando e cuidando. Participe, doe, transforme vidas!"',
+    'hero.title': 'Casa dos Filhos: Apoie e Doe para Crianças em Manaus com Amor e Educação',
+    'hero.subtitle': 'Oferecemos educação complementar, esporte, alimentação balanceada e acolhimento diário para crianças em situação de vulnerabilidade social na Casa dos Filhos no coração de Manaus.',
+    'hero.slogan': '"Acolhendo, amando e cuidando. Participe, doe, transforme a vida de crianças na Casa dos Filhos!"',
     'hero.badgeCnpj': 'CNPJ Ativo: 50.842.391/0001-60',
     'hero.badgeTransparent': '100% Transparência e Prestação de Contas',
     'hero.badgeDirect': 'Doação Direta Sem Intermediários',
@@ -33,7 +33,7 @@ export const ui = {
     'hero.classesLabel': 'gratuitas de educação, esporte e cultura',
 
     // Donation Widget
-    'donation.cardTitle': 'Faça Sua Doação via PIX',
+    'donation.cardTitle': 'Faça Sua Doação para a Casa dos Filhos via PIX',
     'donation.cardSubtitle': 'Sua contribuição transforma o dia de uma criança em Manaus agora mesmo.',
     'donation.presetLabel': 'Selecione o valor do seu apoio:',
     'donation.customLabel': 'Outro Valor',
@@ -43,7 +43,7 @@ export const ui = {
     'donation.copyPixBtn': 'Copiar Chave PIX',
     'donation.copiedToast': 'Chave PIX copiada com sucesso!',
     'donation.openQrBtn': 'Ver QR Code PIX',
-    'donation.impactLabel': 'Impacto direto da sua doação:',
+    'donation.impactLabel': 'Impacto direto da sua doação para as crianças:',
     'donation.impact20': 'Garante lanches saudáveis e frutas frescas para 1 criança por 1 semana.',
     'donation.impact50': 'Garante materiais escolares, cadernos e livros para oficinas pedagógicas.',
     'donation.impact100': 'Garante kimono/uniforme e 1 mês completo de aulas de Jiu-Jitsu ou Balé.',
@@ -53,7 +53,7 @@ export const ui = {
     'donation.intlPrompt': 'Mora no exterior? Clique aqui para instruções internacionais',
 
     // QR Modal
-    'qr.modalTitle': 'Doação via QR Code PIX',
+    'qr.modalTitle': 'Doação para a Casa dos Filhos via QR Code PIX',
     'qr.modalDesc': 'Abra o aplicativo do seu banco, escolha a opção "Pagar com PIX" e escaneie o código abaixo:',
     'qr.pixKeyOfficial': 'Chave CNPJ: 50.842.391/0001-60',
     'qr.recipient': 'Favorecido: Casa dos Filhos',
@@ -62,24 +62,24 @@ export const ui = {
 
     // Impact Section
     'impact.badge': 'O QUE A SUA DOAÇÃO CONSTRÓI',
-    'impact.title': 'Cada centavo é transformado em esperança e futuro',
+    'impact.title': 'O Impacto da Casa dos Filhos na Vida das Crianças em Manaus',
     'impact.subtitle': 'Transparência radical: veja exatamente como a sua generosidade se materializa na rotina das nossas crianças.',
     'impact.card1.val': 'R$ 30',
-    'impact.card1.title': 'Nutrição e Saúde',
+    'impact.card1.title': 'Nutrição e Saúde para Crianças',
     'impact.card1.desc': 'Almoço e lanches nutritivos com frutas frescas para 1 criança durante uma semana inteira.',
     'impact.card2.val': 'R$ 60',
-    'impact.card2.title': 'Educação e Idiomas',
+    'impact.card2.title': 'Educação e Idiomas na Casa dos Filhos',
     'impact.card2.desc': 'Material pedagógico completo, livros e apostilas para aulas de reforço, Inglês e Espanhol.',
     'impact.card3.val': 'R$ 120',
-    'impact.card3.title': 'Esporte, Balé e Artes',
+    'impact.card3.title': 'Esporte, Balé e Artes para Jovens',
     'impact.card3.desc': 'Kimono de Jiu-Jitsu, sapatilha de balé, tabuleiros de xadrez e instrução semanal especializada.',
     'impact.card4.val': 'R$ 300',
-    'impact.card4.title': 'Apadrinhamento Mensal',
+    'impact.card4.title': 'Apadrinhamento Mensal de uma Criança',
     'impact.card4.desc': 'Cuidado integral de uma criança: alimentação diária, todas as oficinas, apoio psicopedagógico e acompanhamento familiar.',
 
     // Activities Section
     'activities.badge': 'NOSSOS PILARES DE ATUAÇÃO',
-    'activities.title': 'Desenvolvimento completo para transformar destinos',
+    'activities.title': 'Projetos e Oficinas da Casa dos Filhos para Crianças em Manaus',
     'activities.subtitle': 'A Casa dos Filhos vai muito além do acolhimento básico. Desenvolvemos o intelecto, o corpo e os valores de cada jovem.',
     'activities.pilar1.title': 'Educação & Idiomas',
     'activities.pilar1.desc': 'Reforço escolar personalizado no contraturno, alfabetização com carinho e introdução ao Inglês e Espanhol.',
@@ -92,7 +92,7 @@ export const ui = {
 
     // Bank Details Section
     'bank.badge': 'DADOS BANCÁRIOS COMPLETOS',
-    'bank.title': 'Transparência total para você doar com tranquilidade',
+    'bank.title': 'Transparência Bancária da Casa dos Filhos para Suas Doações',
     'bank.subtitle': 'Você pode doar por transferência bancária tradicional (TED/DOC/PIX) direto na conta jurídica da instituição.',
     'bank.holderLabel': 'Titular da Conta:',
     'bank.holderValue': 'CASA DOS FILHOS',
@@ -112,13 +112,13 @@ export const ui = {
 
     // Gallery Section
     'gallery.badge': 'VIDAS TRANSFORMADAS',
-    'gallery.title': 'Cada sorriso conta uma história de esperança',
-    'gallery.subtitle': 'Veja imagens reais do nosso dia a dia em Manaus e conecte-se com o coração do nosso trabalho.',
+    'gallery.title': 'Sorrisos e Histórias da Casa dos Filhos com Crianças em Manaus',
+    'gallery.subtitle': 'Veja imagens reais do nosso dia a dia na Casa dos Filhos em Manaus e conecte-se com o coração do nosso trabalho.',
     'gallery.instagramBtn': 'Siga @casadosfilhos no Instagram',
 
     // FAQ Section
     'faq.badge': 'TIRE SUAS DÚVIDAS',
-    'faq.title': 'Perguntas Frequentes',
+    'faq.title': 'Perguntas Frequentes sobre a Casa dos Filhos e Crianças Atendidas',
     'faq.subtitle': 'Tudo o que você precisa saber sobre como apoiar, doar e acompanhar o nosso trabalho.',
     'faq.q1': 'Como meu dinheiro é utilizado?',
     'faq.a1': '100% dos valores arrecadados são destinados diretamente à manutenção das atividades da Casa dos Filhos em Manaus: compra de alimentos para refeições diárias, aquisição de materiais escolares, kimonos de jiu-jitsu, sapatilhas de balé, manutenção do espaço físico e apoio às famílias em extrema vulnerabilidade.',
@@ -157,9 +157,9 @@ export const ui = {
 
     // Hero
     'hero.badge': 'VERIFIED SOCIAL PROJECT • MANAUS, AMAZON',
-    'hero.title': 'Transform the future of dozens of children in Manaus through love and education.',
+    'hero.title': 'Casa dos Filhos: Support and Empower Children in Manaus through Love & Education',
     'hero.subtitle': 'We provide complementary education, sports, nutritious meals, and daily loving care for vulnerable children in the heart of the Brazilian Amazon.',
-    'hero.slogan': '"Welcoming, loving, and caring. Take part, donate, transform lives!"',
+    'hero.slogan': '"Welcoming, loving, and caring. Take part, donate, transform children\'s lives!"',
     'hero.badgeCnpj': 'Active Legal Tax ID (CNPJ): 50.842.391/0001-60',
     'hero.badgeTransparent': '100% Financial Transparency & Accountability',
     'hero.badgeDirect': 'Direct Donation With Zero Intermediary Fees',
@@ -171,7 +171,7 @@ export const ui = {
     'hero.classesLabel': 'free educational, sports & art classes',
 
     // Donation Widget
-    'donation.cardTitle': 'Support Casa dos Filhos',
+    'donation.cardTitle': 'Support Casa dos Filhos via PIX',
     'donation.cardSubtitle': 'Your contribution directly empowers a child in Manaus right now.',
     'donation.presetLabel': 'Select your donation amount:',
     'donation.customLabel': 'Other Amount',
@@ -181,7 +181,7 @@ export const ui = {
     'donation.copyPixBtn': 'Copy PIX Key',
     'donation.copiedToast': 'PIX Key successfully copied to clipboard!',
     'donation.openQrBtn': 'View PIX QR Code',
-    'donation.impactLabel': 'Direct impact of your gift:',
+    'donation.impactLabel': 'Direct impact of your gift for children:',
     'donation.impact20': 'Provides healthy snacks and fresh fruit for 1 child for an entire week.',
     'donation.impact50': 'Provides full school supplies, notebooks, and learning books for classes.',
     'donation.impact100': 'Provides sports uniform/gi and 1 full month of Jiu-Jitsu or Ballet classes.',
@@ -191,7 +191,7 @@ export const ui = {
     'donation.intlPrompt': 'Living outside Brazil? View international wire instructions below',
 
     // QR Modal
-    'qr.modalTitle': 'Donate via PIX QR Code',
+    'qr.modalTitle': 'Donate to Casa dos Filhos via PIX QR Code',
     'qr.modalDesc': 'Open your banking app, select "Pay with PIX" and scan the code below:',
     'qr.pixKeyOfficial': 'Official CNPJ: 50.842.391/0001-60',
     'qr.recipient': 'Beneficiary: Casa dos Filhos',
@@ -200,24 +200,24 @@ export const ui = {
 
     // Impact Section
     'impact.badge': 'WHAT YOUR DONATION BUILDS',
-    'impact.title': 'Every contribution becomes hope and opportunity',
+    'impact.title': 'Impact of Casa dos Filhos on Children in Manaus',
     'impact.subtitle': 'Radical transparency: see exactly how your generosity empowers our children daily.',
     'impact.card1.val': '$6 / R$ 30',
-    'impact.card1.title': 'Nutrition & Health',
+    'impact.card1.title': 'Nutrition & Health for Children',
     'impact.card1.desc': 'Nutritious lunch and fresh fruit snacks for 1 child for a full week.',
     'impact.card2.val': '$12 / R$ 60',
-    'impact.card2.title': 'Education & Languages',
+    'impact.card2.title': 'Education & Languages at Casa dos Filhos',
     'impact.card2.desc': 'Complete learning materials, books, and tutoring in English and Spanish.',
     'impact.card3.val': '$24 / R$ 120',
-    'impact.card3.title': 'Sports, Ballet & Arts',
+    'impact.card3.title': 'Sports, Ballet & Arts for Youth',
     'impact.card3.desc': 'Jiu-Jitsu uniform, ballet shoes, chess sets, and weekly specialized coaching.',
     'impact.card4.val': '$60 / R$ 300',
-    'impact.card4.title': 'Full Monthly Sponsorship',
+    'impact.card4.title': 'Full Monthly Sponsorship for a Child',
     'impact.card4.desc': 'Comprehensive care for 1 child: daily meals, all workshops, psycho-pedagogical support, and family follow-up.',
 
     // Activities Section
     'activities.badge': 'OUR CORE PILLARS',
-    'activities.title': 'Holistic development that transforms futures',
+    'activities.title': 'Projects and Workshops at Casa dos Filhos for Children in Manaus',
     'activities.subtitle': 'Casa dos Filhos goes beyond basic shelter. We nurture intellect, physical discipline, and character in every young person.',
     'activities.pilar1.title': 'Education & Languages',
     'activities.pilar1.desc': 'Personalized after-school tutoring, compassionate literacy programs, and introduction to English and Spanish.',
@@ -230,7 +230,7 @@ export const ui = {
 
     // Bank Details Section
     'bank.badge': 'OFFICIAL BANKING DETAILS',
-    'bank.title': 'Full transparency so you can donate with peace of mind',
+    'bank.title': 'Banking Transparency at Casa dos Filhos for Your Donations',
     'bank.subtitle': 'Donate directly to our verified Brazilian non-profit bank account.',
     'bank.holderLabel': 'Account Beneficiary:',
     'bank.holderValue': 'CASA DOS FILHOS',
@@ -250,13 +250,13 @@ export const ui = {
 
     // Gallery Section
     'gallery.badge': 'TRANSFORMED LIVES',
-    'gallery.title': 'Every smile tells a story of hope',
+    'gallery.title': 'Smiles and Stories of Children at Casa dos Filhos in Manaus',
     'gallery.subtitle': 'See real moments from our daily work in Manaus and connect with our community.',
     'gallery.instagramBtn': 'Follow @casadosfilhos on Instagram',
 
     // FAQ Section
     'faq.badge': 'FREQUENTLY ASKED QUESTIONS',
-    'faq.title': 'Frequently Asked Questions',
+    'faq.title': 'Frequently Asked Questions about Casa dos Filhos and Supported Children',
     'faq.subtitle': 'Everything you need to know about supporting, donating, and following our journey.',
     'faq.q1': 'How is my donation used?',
     'faq.a1': '100% of the funds raised go directly to running Casa dos Filhos activities in Manaus: purchasing daily meals, school supplies, jiu-jitsu gis, ballet shoes, center maintenance, and emergency food baskets for families in extreme poverty.',

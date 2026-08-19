@@ -13,16 +13,16 @@ interface Props {
 const {
   lang = 'pt',
   title = lang === 'pt'
-    ? 'Casa dos Filhos | Apoie Crianças em Manaus/AM'
-    : 'Casa dos Filhos | Support Children in Manaus',
+    ? 'Casa dos Filhos | Doe para Crianças em Manaus/AM'
+    : 'Casa dos Filhos | Support Children in Manaus, Amazon',
   description = lang === 'pt'
-    ? 'Doe para a Casa dos Filhos em Manaus/AM e transforme vidas através de educação, esporte, alimentação saudável e acolhimento diário.'
+    ? 'Doe para a Casa dos Filhos em Manaus/AM e transforme vidas de crianças através de educação, esporte, alimentação saudável e acolhimento diário.'
     : 'Support Casa dos Filhos in Manaus, Brazil. Transform children\'s lives through education, sports, nutrition, and loving daily care.',
-  canonicalUrl = `https://casa-dos-filhos.netlify.app/${lang}`
+  canonicalUrl = `https://casa-dos-filhos.netlify.app/${lang}/`
 } = Astro.props;
 
 const siteUrl = 'https://casa-dos-filhos.netlify.app';
-const ogImage = `${siteUrl}/images/hero-kids.jpg`;
+const ogImage = `${siteUrl}/images/hero-kids.webp`;
 
 const jsonLd = {
   "@context": "https://schema.org",
@@ -34,8 +34,8 @@ const jsonLd = {
       "alternateName": "@casadosfilhos",
       "legalName": "CASA DOS FILHOS",
       "taxID": "50.842.391/0001-60",
-      "url": siteUrl,
-      "logo": `${siteUrl}/images/logo.svg`,
+      "url": `${siteUrl}/pt/`,
+      "logo": `${siteUrl}/favicon.svg`,
       "image": ogImage,
       "description": "Organização sem fins lucrativos em Manaus/AM acolhendo crianças em vulnerabilidade social através de educação, esportes, nutrição e apoio sociofamiliar.",
       "telephone": "+55-92-99176-4615",
@@ -73,7 +73,7 @@ const jsonLd = {
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
-      "url": siteUrl,
+      "url": `${siteUrl}/pt/`,
       "name": "Casa dos Filhos",
       "publisher": {
         "@id": `${siteUrl}/#organization`
@@ -89,8 +89,16 @@ const jsonLd = {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#BE185D" />
+
+    <!-- Comprehensive Favicon & App Icons -->
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
 
     <!-- Primary Meta Tags (Strict 50-60 chars title, 120-160 chars description) -->
     <title>{title}</title>
@@ -100,10 +108,10 @@ const jsonLd = {
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href={canonicalUrl} />
 
-    <!-- Hreflang Tags -->
-    <link rel="alternate" hreflang="pt" href={`${siteUrl}/pt`} />
-    <link rel="alternate" hreflang="en" href={`${siteUrl}/en`} />
-    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/pt`} />
+    <!-- Hreflang Tags (With canonical trailing slash) -->
+    <link rel="alternate" hreflang="pt" href={`${siteUrl}/pt/`} />
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/en/`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/pt/`} />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
@@ -127,10 +135,23 @@ const jsonLd = {
     <meta name="geo.position" content="-3.119028;-60.021731" />
     <meta name="ICBM" content="-3.119028, -60.021731" />
 
-    <!-- Fonts: Google Fonts Plus Jakarta Sans preconnected -->
+    <!-- Non-Render-Blocking Google Fonts with font-display swap -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" media="print" onload="this.media='all'" />
+    <noscript>
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" />
+    </noscript>
+
+    <!-- Google tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-48Q8Y6L7Q3"></script>
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-48Q8Y6L7Q3', { 'anonymize_ip': true });
+    </script>
 
     <!-- Schema.org JSON-LD Structured Data (LocalBusiness + NGO) -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />

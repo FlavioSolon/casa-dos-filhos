@@ -82,3 +82,68 @@
 .animate-pulse-glow {
   animation: pulseGlow 2.5s ease-in-out infinite;
 }
+
+/* ==========================================================================
+   CSS Media Queries for Responsive Web Design & Viewport Adaptability
+   ========================================================================== */
+
+/* Mobile devices (phones, up to 640px) */
+@media screen and (max-width: 640px) {
+  html {
+    font-size: 15px;
+  }
+  .responsive-img-cover {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* Tablet & medium screens (641px to 1024px) */
+@media screen and (min-width: 641px) and (max-width: 1024px) {
+  html {
+    font-size: 16px;
+  }
+  .responsive-img-cover {
+    width: 100%;
+    object-fit: cover;
+  }
+}
+
+/* Desktop and wide screens (1025px and up) */
+@media screen and (min-width: 1025px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* High-resolution displays (Retina, 2x+) */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* Accessibility: Reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Print Styles */
+@media print {
+  body {
+    background: #fff;
+    color: #000;
+  }
+  .no-print {
+    display: none !important;
+  }
+}

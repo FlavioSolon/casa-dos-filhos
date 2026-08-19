@@ -28,7 +28,7 @@
           light: '#FFFFFF',
         },
         errorCorrectionLevel: 'M',
-      }).then((url) => {
+      }).then((url: string) => {
         qrDataUrl = url;
       });
       // Prevent body scroll when modal is open
@@ -63,17 +63,22 @@
 
 {#if isOpen}
   <div
-    class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/70 backdrop-blur-xs animate-in fade-in duration-200"
+    class="fixed inset-0 z-50 flex items-center justify-center p-4 animate-in fade-in duration-200"
     role="dialog"
     aria-modal="true"
     aria-labelledby="modal-title"
-    tabindex="-1"
-    onclick={(e) => {
-      if (e.target === e.currentTarget) onClose();
-    }}
   >
+    <!-- Accessible Backdrop Button -->
+    <button
+      type="button"
+      class="fixed inset-0 w-full h-full bg-slate-900/70 backdrop-blur-xs cursor-default border-0 p-0"
+      onclick={onClose}
+      aria-label={lang === 'pt' ? 'Fechar modal' : 'Close modal'}
+      tabindex="-1"
+    ></button>
+
     <div
-      class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100 animate-in zoom-in-95 duration-200"
+      class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl overflow-hidden border border-slate-100 animate-in zoom-in-95 duration-200 z-10"
     >
       <!-- Header Gradient & Close Button -->
       <div class="relative bg-gradient-to-r from-rose-900 via-rose-800 to-pink-800 p-6 text-white text-center">
@@ -82,7 +87,7 @@
           type="button"
           onclick={onClose}
           class="absolute top-4 right-4 p-2 text-white/80 hover:text-white hover:bg-white/20 rounded-full transition-colors cursor-pointer"
-          aria-label="Fechar"
+          aria-label={lang === 'pt' ? 'Fechar modal' : 'Close modal'}
         >
           <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />

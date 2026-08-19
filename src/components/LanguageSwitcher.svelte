@@ -11,11 +11,15 @@
     let newPath = pathname;
 
     if (currentLang === 'pt' && pathname.startsWith('/pt')) {
-      newPath = pathname.replace(/^\/pt/, `/${targetLang}`);
+      newPath = pathname.replace(/^\/pt\/?/, `/${targetLang}/`);
     } else if (currentLang === 'en' && pathname.startsWith('/en')) {
-      newPath = pathname.replace(/^\/en/, `/${targetLang}`);
+      newPath = pathname.replace(/^\/en\/?/, `/${targetLang}/`);
     } else {
-      newPath = `/${targetLang}`;
+      newPath = `/${targetLang}/`;
+    }
+
+    if (!newPath.endsWith('/')) {
+      newPath += '/';
     }
 
     window.location.href = newPath;
