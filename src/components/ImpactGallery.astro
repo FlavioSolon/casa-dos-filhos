@@ -1,0 +1,112 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: 'pt' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const gallery = [
+  {
+    img: '/images/gallery-volunteers.jpg',
+    title: lang === 'pt' ? 'Mural Comunitário com Voluntários' : 'Community Mural with Volunteers',
+    desc: lang === 'pt' ? 'Arte e união transformando a comunidade em Manaus' : 'Art and solidarity in Manaus',
+    colSpan: 'md:col-span-2 md:row-span-2',
+    height: 'h-80 md:h-[480px]'
+  },
+  {
+    img: '/images/hero-kids.jpg',
+    title: lang === 'pt' ? 'Sorrisos e Acolhimento' : 'Smiles and Loving Care',
+    desc: lang === 'pt' ? 'Mais de 80 crianças atendidas semanalmente' : 'Over 80 children supported weekly',
+    colSpan: 'md:col-span-1',
+    height: 'h-60 md:h-[230px]'
+  },
+  {
+    img: '/images/activity-sports.jpg',
+    title: lang === 'pt' ? 'Jiu-Jitsu & Balé' : 'Jiu-Jitsu & Ballet',
+    desc: lang === 'pt' ? 'Disciplina, respeito e desenvolvimento motor' : 'Discipline, respect, and physical growth',
+    colSpan: 'md:col-span-1',
+    height: 'h-60 md:h-[230px]'
+  },
+  {
+    img: '/images/activity-education.jpg',
+    title: lang === 'pt' ? 'Reforço Escolar e Idiomas' : 'Tutoring & Languages',
+    desc: lang === 'pt' ? 'Aulas de Português, Inglês e Espanhol' : 'English, Spanish and School Tutoring',
+    colSpan: 'md:col-span-1',
+    height: 'h-60 md:h-[230px]'
+  },
+  {
+    img: '/images/activity-food.jpg',
+    title: lang === 'pt' ? 'Segurança Alimentar' : 'Nutritious Meals',
+    desc: lang === 'pt' ? 'Refeições completas com frutas frescas' : 'Balanced daily nutrition',
+    colSpan: 'md:col-span-1',
+    height: 'h-60 md:h-[230px]'
+  },
+];
+---
+
+<section id="galeria" class="py-20 bg-slate-50 border-b border-slate-200/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-800 text-xs font-black uppercase tracking-wider mb-3">
+        <span>{t('gallery.badge')}</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+        {t('gallery.title')}
+      </h2>
+      <p class="text-slate-600 text-base sm:text-lg mt-3 font-medium">
+        {t('gallery.subtitle')}
+      </p>
+    </div>
+
+    <!-- Masonry/Bento Photo Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {gallery.map((item) => (
+        <div class={`relative rounded-3xl overflow-hidden shadow-md group ${item.colSpan} ${item.height}`}>
+          <img
+            src={item.img}
+            alt={item.title}
+            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            loading="lazy"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-90 transition-opacity"></div>
+          
+          <div class="absolute bottom-5 left-5 right-5 text-white">
+            <h3 class="text-base sm:text-lg font-black">{item.title}</h3>
+            <p class="text-xs sm:text-sm text-slate-200 mt-1 font-medium">{item.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <!-- Instagram Connect Banner -->
+    <div class="mt-12 bg-white rounded-3xl p-6 sm:p-8 border border-slate-200/80 shadow-md flex flex-col sm:flex-row items-center justify-between gap-6">
+      <div class="flex items-center gap-4 text-center sm:text-left">
+        <div class="w-14 h-14 rounded-2xl bg-gradient-to-tr from-amber-500 via-rose-600 to-purple-700 flex items-center justify-center text-white shrink-0 shadow-md">
+          <svg class="w-7 h-7" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+          </svg>
+        </div>
+        <div>
+          <h3 class="text-lg font-black text-slate-900">@casadosfilhos</h3>
+          <p class="text-xs sm:text-sm text-slate-600 font-medium">Acompanhe fotos, vídeos diários e histórias das nossas crianças.</p>
+        </div>
+      </div>
+
+      <a
+        href="https://www.instagram.com/casadosfilhos/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="inline-flex items-center gap-2 px-6 py-3.5 rounded-2xl bg-gradient-to-r from-rose-600 via-rose-700 to-pink-700 hover:from-rose-500 hover:to-pink-600 text-white font-bold text-sm shadow-md hover:shadow-lg transition-all duration-200 shrink-0"
+      >
+        <span>{t('gallery.instagramBtn')}</span>
+        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</section>

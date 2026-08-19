@@ -1,0 +1,102 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  lang?: 'pt' | 'en';
+  canonicalUrl?: string;
+}
+
+const {
+  lang = 'pt',
+  title = lang === 'pt'
+    ? 'Casa dos Filhos (@casadosfilhos) | Apoie Crianças em Manaus/AM'
+    : 'Casa dos Filhos | Support Vulnerable Children in Manaus, Amazon',
+  description = lang === 'pt'
+    ? 'Acolhendo, amando e cuidando. Doe para a Casa dos Filhos em Manaus/AM e transforme vidas através de educação, esportes, alimentação balanceada e acolhimento diário.'
+    : 'Empower vulnerable children in Manaus, Amazon. Support Casa dos Filhos through education, sports, nutrition, and loving daily care. Donate via PIX or bank transfer.',
+  canonicalUrl = `https://casadosfilhos.org/${lang}`
+} = Astro.props;
+
+const siteUrl = 'https://casadosfilhos.org';
+const ogImage = `${siteUrl}/images/hero-kids.jpg`;
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "NGO",
+  "name": "Casa dos Filhos",
+  "description": "Projeto social em Manaus acolhendo, amando e cuidando de crianças através de educação, esporte e alimentação.",
+  "taxID": "50.842.391/0001-60",
+  "url": siteUrl,
+  "logo": `${siteUrl}/images/logo.svg`,
+  "image": ogImage,
+  "telephone": "+5592991764615",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "Manaus",
+    "addressRegion": "AM",
+    "postalCode": "69097-122",
+    "addressCountry": "BR"
+  },
+  "sameAs": [
+    "https://www.instagram.com/casadosfilhos/"
+  ]
+};
+---
+
+<!doctype html>
+<html lang={lang} class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/svg+xml" href="/images/logo.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="author" content="Casa dos Filhos" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Hreflang Tags -->
+    <link rel="alternate" hreflang="pt" href={`${siteUrl}/pt`} />
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/en`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/pt`} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content={lang === 'pt' ? 'pt_BR' : 'en_US'} />
+    <meta property="og:site_name" content="Casa dos Filhos" />
+
+    <!-- Twitter Cards -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={ogImage} />
+
+    <!-- Fonts: Google Fonts Plus Jakarta Sans preconnected -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet" />
+
+    <!-- Schema.org JSON-LD Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-[#FAFAFA] text-slate-900 selection:bg-rose-100 selection:text-rose-900">
+    <Header lang={lang} />
+    <main class="flex-grow">
+      <slot />
+    </main>
+    <Footer lang={lang} />
+  </body>
+</html>

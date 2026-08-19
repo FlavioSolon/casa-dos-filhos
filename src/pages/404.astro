@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="Página Não Encontrada | Casa dos Filhos" lang="pt">
+  <div class="py-24 px-4 sm:px-6 lg:px-8 text-center max-w-2xl mx-auto space-y-6">
+    <div class="w-24 h-24 mx-auto">
+      <img src="/images/logo.svg" alt="Casa dos Filhos" class="w-full h-full object-contain" />
+    </div>
+
+    <div class="inline-block px-4 py-1 rounded-full bg-rose-50 text-rose-800 text-xs font-black uppercase tracking-wider">
+      Erro 404
+    </div>
+
+    <h1 class="text-4xl font-black text-slate-950">
+      Página Não Encontrada
+    </h1>
+
+    <p class="text-slate-600 font-medium">
+      O endereço que você tentou acessar não existe ou foi alterado. Convidamos você a conhecer a nossa missão e apoiar nossas crianças!
+    </p>
+
+    <div class="pt-4 flex flex-col sm:flex-row items-center justify-center gap-3">
+      <a
+        href="/pt"
+        class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-rose-900 hover:bg-rose-800 text-white font-bold text-sm shadow-md transition-colors"
+      >
+        Voltar à Página Principal
+      </a>
+      <a
+        href="/pt#doar"
+        class="w-full sm:w-auto px-6 py-3 rounded-2xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-black text-sm shadow-md transition-colors"
+      >
+        Fazer uma Doação
+      </a>
+    </div>
+  </div>
+</BaseLayout>

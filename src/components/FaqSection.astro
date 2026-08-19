@@ -1,0 +1,49 @@
+---
+import FaqAccordion from './FaqAccordion.svelte';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: 'pt' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="faq" class="py-20 bg-white border-b border-slate-200/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-800 text-xs font-black uppercase tracking-wider mb-3">
+        <span>{t('faq.badge')}</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+        {t('faq.title')}
+      </h2>
+      <p class="text-slate-600 text-base sm:text-lg mt-3 font-medium">
+        {t('faq.subtitle')}
+      </p>
+    </div>
+
+    <!-- Svelte FAQ Accordion Island -->
+    <FaqAccordion client:visible lang={lang} />
+
+    <!-- Help contact banner -->
+    <div class="mt-12 text-center text-sm text-slate-600">
+      <p class="font-medium">
+        {lang === 'pt' ? 'Ainda tem dúvidas? Fale diretamente com a nossa equipe:' : 'Still have questions? Chat directly with our team:'}
+        <a
+          href="https://wa.me/5592991764615?text=Ol%C3%A1%2C+tenho+uma+d%C3%BAvida+sobre+a+Casa+dos+Filhos"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-1 ml-2 font-bold text-emerald-700 hover:text-emerald-800 underline"
+        >
+          <span>WhatsApp (92) 99176-4615</span>
+          <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+          </svg>
+        </a>
+      </p>
+    </div>
+  </div>
+</section>

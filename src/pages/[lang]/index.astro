@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Hero from '../../components/Hero.astro';
+import ImpactMetrics from '../../components/ImpactMetrics.astro';
+import ActivitiesGrid from '../../components/ActivitiesGrid.astro';
+import BankDetailsCard from '../../components/BankDetailsCard.astro';
+import ImpactGallery from '../../components/ImpactGallery.astro';
+import FaqSection from '../../components/FaqSection.astro';
+
+export function getStaticPaths() {
+  return [
+    { params: { lang: 'pt' } },
+    { params: { lang: 'en' } },
+  ];
+}
+
+const { lang } = Astro.params as { lang: 'pt' | 'en' };
+---
+
+<BaseLayout lang={lang}>
+  <Hero lang={lang} />
+  <ImpactMetrics lang={lang} />
+  <ActivitiesGrid lang={lang} />
+  <BankDetailsCard lang={lang} />
+  <ImpactGallery lang={lang} />
+  <FaqSection lang={lang} />
+</BaseLayout>

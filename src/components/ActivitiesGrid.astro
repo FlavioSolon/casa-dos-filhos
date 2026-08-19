@@ -1,0 +1,107 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: 'pt' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const activities = [
+  {
+    title: t('activities.pilar1.title'),
+    desc: t('activities.pilar1.desc'),
+    img: '/images/activity-education.jpg',
+    tags: lang === 'pt' ? ['Reforço Escolar', 'Inglês', 'Espanhol', 'Leitura'] : ['School Tutoring', 'English', 'Spanish', 'Reading'],
+    badgeColor: 'bg-sky-500 text-white',
+    badgeText: lang === 'pt' ? 'Pilar 01' : 'Pillar 01'
+  },
+  {
+    title: t('activities.pilar2.title'),
+    desc: t('activities.pilar2.desc'),
+    img: '/images/activity-sports.jpg',
+    tags: lang === 'pt' ? ['Jiu-Jitsu', 'Balé Clássico', 'Educação Física'] : ['Jiu-Jitsu', 'Ballet', 'Physical Ed'],
+    badgeColor: 'bg-amber-500 text-slate-950',
+    badgeText: lang === 'pt' ? 'Pilar 02' : 'Pillar 02'
+  },
+  {
+    title: t('activities.pilar3.title'),
+    desc: t('activities.pilar3.desc'),
+    img: '/images/activity-chess.jpg',
+    tags: lang === 'pt' ? ['Xadrez', 'Raciocínio Lógico', 'Aulas Bíblicas', 'Ética'] : ['Chess', 'Logic & Strategy', 'Bible Stories', 'Ethics'],
+    badgeColor: 'bg-emerald-600 text-white',
+    badgeText: lang === 'pt' ? 'Pilar 03' : 'Pillar 03'
+  },
+  {
+    title: t('activities.pilar4.title'),
+    desc: t('activities.pilar4.desc'),
+    img: '/images/activity-food.jpg',
+    tags: lang === 'pt' ? ['Alimentação Saudável', 'Frutas Frescas', 'Cestas Básicas'] : ['Nutritious Meals', 'Fresh Fruits', 'Food Hampers'],
+    badgeColor: 'bg-rose-800 text-white',
+    badgeText: lang === 'pt' ? 'Pilar 04' : 'Pillar 04'
+  },
+];
+---
+
+<section id="atividades" class="py-20 bg-slate-50 border-b border-slate-200/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Header -->
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-100/70 border border-rose-200 text-rose-900 text-xs font-black uppercase tracking-wider mb-3">
+        <span>{t('activities.badge')}</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+        {t('activities.title')}
+      </h2>
+      <p class="text-slate-600 text-base sm:text-lg mt-3 font-medium">
+        {t('activities.subtitle')}
+      </p>
+    </div>
+
+    <!-- 4 Pillar Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+      {activities.map((item) => (
+        <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
+          <!-- Image container with subtle zoom -->
+          <div class="relative h-64 sm:h-72 overflow-hidden bg-slate-100">
+            <img
+              src={item.img}
+              alt={item.title}
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              loading="lazy"
+              width="600"
+              height="350"
+            />
+            <div class="absolute top-4 left-4">
+              <span class={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider shadow-sm ${item.badgeColor}`}>
+                {item.badgeText}
+              </span>
+            </div>
+          </div>
+
+          <!-- Content body -->
+          <div class="p-6 sm:p-8 flex-1 flex flex-col justify-between space-y-4">
+            <div>
+              <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-2">
+                {item.title}
+              </h3>
+              <p class="text-slate-600 text-sm sm:text-base leading-relaxed font-medium">
+                {item.desc}
+              </p>
+            </div>
+
+            <!-- Tags -->
+            <div class="flex flex-wrap gap-2 pt-2">
+              {item.tags.map((tag) => (
+                <span class="px-3 py-1 rounded-xl bg-slate-100 text-slate-700 font-bold text-xs">
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

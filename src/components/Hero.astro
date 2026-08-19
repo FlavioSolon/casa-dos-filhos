@@ -1,0 +1,124 @@
+---
+import DonationWidget from './DonationWidget.svelte';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: 'pt' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="sobre" class="relative overflow-hidden pt-8 pb-16 lg:pt-14 lg:pb-24 bg-rainbow-gradient border-b border-rose-100/60">
+  <!-- Subtle decorative ambient blobs -->
+  <div class="absolute -top-40 -left-40 w-96 h-96 bg-rose-200/40 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute top-1/2 -right-40 w-96 h-96 bg-amber-200/40 rounded-full blur-3xl pointer-events-none"></div>
+  <div class="absolute -bottom-20 left-1/3 w-80 h-80 bg-sky-200/30 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Trust Pill Badge -->
+    <div class="flex items-center justify-center lg:justify-start mb-6">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 shadow-xs border border-rose-200/80 text-rose-900 text-xs font-black tracking-wide uppercase">
+        <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+        <span>{t('hero.badge')}</span>
+      </div>
+    </div>
+
+    <!-- Main Grid: Left Storytelling + Right Donation Island -->
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      <!-- Left Column: Emotional Story & Verification -->
+      <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+        <h1 class="text-3xl sm:text-5xl lg:text-5xl/tight font-black text-slate-950 tracking-tight">
+          {t('hero.title')}
+        </h1>
+
+        <p class="text-base sm:text-lg text-slate-700 font-medium leading-relaxed max-w-2xl mx-auto lg:mx-0">
+          {t('hero.subtitle')}
+        </p>
+
+        <!-- Slogan Quote Box -->
+        <div class="p-4 sm:p-5 rounded-2xl bg-white/80 backdrop-blur-xs border border-rose-200/70 shadow-sm inline-block max-w-2xl">
+          <p class="text-sm sm:text-base font-bold text-rose-950 italic">
+            {t('hero.slogan')}
+          </p>
+        </div>
+
+        <!-- Social Proof Chips -->
+        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-2.5 pt-2">
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-slate-900 text-white text-xs font-bold shadow-xs">
+            <svg class="w-4 h-4 text-emerald-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+            </svg>
+            <span>{t('hero.badgeCnpj')}</span>
+          </div>
+
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl bg-white text-slate-800 border border-slate-200 text-xs font-bold shadow-xs">
+            <svg class="w-4 h-4 text-amber-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            <span>{t('hero.badgeTransparent')}</span>
+          </div>
+        </div>
+
+        <!-- Key Metrics Cards -->
+        <div class="grid grid-cols-3 gap-3 sm:gap-4 pt-4">
+          <div class="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs text-center">
+            <span class="block text-xl sm:text-2xl font-black text-rose-900">{t('hero.kidsCount')}</span>
+            <span class="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block mt-0.5">{t('hero.kidsLabel')}</span>
+          </div>
+          <div class="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs text-center">
+            <span class="block text-xl sm:text-2xl font-black text-amber-600">{t('hero.mealsCount')}</span>
+            <span class="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block mt-0.5">{t('hero.mealsLabel')}</span>
+          </div>
+          <div class="p-3.5 sm:p-4 rounded-2xl bg-white/90 border border-slate-200/80 shadow-xs text-center">
+            <span class="block text-xl sm:text-2xl font-black text-emerald-600">{t('hero.classesCount')}</span>
+            <span class="text-[11px] sm:text-xs text-slate-600 font-semibold leading-tight block mt-0.5">{t('hero.classesLabel')}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right Column: Interactive Svelte Donation Island -->
+      <div class="lg:col-span-5 flex justify-center lg:justify-end">
+        <DonationWidget client:load lang={lang} />
+      </div>
+    </div>
+
+    <!-- Hero Image Banner with Rainbow Border Frame -->
+    <div class="mt-14 relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900 group">
+      <img
+        src="/images/hero-kids.jpg"
+        alt="Crianças sorrindo no projeto Casa dos Filhos em Manaus"
+        class="w-full h-72 sm:h-96 lg:h-[460px] object-cover object-center group-hover:scale-102 transition-transform duration-700"
+        loading="eager"
+        width="1280"
+        height="500"
+      />
+      <!-- Gradient overlay for text readability -->
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent"></div>
+      
+      <!-- Caption over photo -->
+      <div class="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-white">
+        <div>
+          <span class="px-3 py-1 bg-rose-600 font-black text-xs uppercase tracking-wider rounded-full shadow-xs">
+            Manaus • AM
+          </span>
+          <h2 class="text-lg sm:text-2xl font-black mt-2">
+            Acolhendo, amando e cuidando de vidas todos os dias.
+          </h2>
+        </div>
+        <a
+          href="https://wa.me/5592991764615?text=Ol%C3%A1%2C+gostaria+de+conhecer+de+perto+a+Casa+dos+Filhos%21"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/40 rounded-xl text-xs sm:text-sm font-bold transition-colors shrink-0"
+        >
+          <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.96.524 1.769.814 2.8.814 3.18 0 5.768-2.587 5.768-5.766 0-3.18-2.588-5.766-5.772-5.766zm9.969 5.828c0 5.518-4.482 10-10 10-1.745 0-3.39-.45-4.834-1.246l-5.166 1.354 1.378-5.035c-.886-1.504-1.378-3.238-1.378-5.073 0-5.518 4.482-10 10-10 5.518 0 10 4.482 10 10z"/>
+          </svg>
+          <span>Agendar Visita em Manaus</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

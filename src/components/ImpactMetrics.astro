@@ -1,0 +1,127 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: 'pt' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+
+const cards = [
+  {
+    val: t('impact.card1.val'),
+    title: t('impact.card1.title'),
+    desc: t('impact.card1.desc'),
+    color: 'border-sky-400 bg-sky-50/50 text-sky-950',
+    tagBg: 'bg-sky-500 text-white',
+    icon: 'meal'
+  },
+  {
+    val: t('impact.card2.val'),
+    title: t('impact.card2.title'),
+    desc: t('impact.card2.desc'),
+    color: 'border-emerald-400 bg-emerald-50/50 text-emerald-950',
+    tagBg: 'bg-emerald-600 text-white',
+    icon: 'book'
+  },
+  {
+    val: t('impact.card3.val'),
+    title: t('impact.card3.title'),
+    desc: t('impact.card3.desc'),
+    color: 'border-amber-400 bg-amber-50/50 text-amber-950',
+    tagBg: 'bg-amber-500 text-slate-950',
+    icon: 'sport'
+  },
+  {
+    val: t('impact.card4.val'),
+    title: t('impact.card4.title'),
+    desc: t('impact.card4.desc'),
+    color: 'border-rose-400 bg-rose-50/50 text-rose-950',
+    tagBg: 'bg-rose-900 text-white',
+    badge: lang === 'pt' ? 'Impacto Integral' : 'Full Sponsorship',
+    icon: 'heart'
+  },
+];
+---
+
+<section id="impacto" class="py-20 bg-white border-b border-slate-100 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section Title & Subtitle -->
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-rose-50 border border-rose-200 text-rose-800 text-xs font-black uppercase tracking-wider mb-3">
+        <span>{t('impact.badge')}</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+        {t('impact.title')}
+      </h2>
+      <p class="text-slate-600 text-base sm:text-lg mt-3 font-medium">
+        {t('impact.subtitle')}
+      </p>
+    </div>
+
+    <!-- 4 Impact Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {cards.map((card, idx) => (
+        <div class={`relative rounded-3xl p-6 sm:p-7 border-2 ${card.color} card-hover-effect flex flex-col justify-between`}>
+          {card.badge && (
+            <span class="absolute -top-3 right-6 px-3 py-1 bg-amber-400 text-slate-950 font-black text-[11px] uppercase tracking-wider rounded-full shadow-xs">
+              {card.badge}
+            </span>
+          )}
+          
+          <div>
+            <div class="flex items-center justify-between mb-4">
+              <span class={`inline-block px-3.5 py-1.5 rounded-2xl font-black text-xl sm:text-2xl shadow-xs ${card.tagBg}`}>
+                {card.val}
+              </span>
+              
+              <div class="w-10 h-10 rounded-full bg-white shadow-xs flex items-center justify-center text-slate-800">
+                {card.icon === 'meal' && (
+                  <svg class="w-5 h-5 text-sky-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v13m0-13V4a2 2 0 114 0v4m-4 0V4a2 2 0 10-4 0v4m0 0h8M5 12h14" />
+                  </svg>
+                )}
+                {card.icon === 'book' && (
+                  <svg class="w-5 h-5 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                  </svg>
+                )}
+                {card.icon === 'sport' && (
+                  <svg class="w-5 h-5 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                  </svg>
+                )}
+                {card.icon === 'heart' && (
+                  <svg class="w-5 h-5 text-rose-600" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                  </svg>
+                )}
+              </div>
+            </div>
+
+            <h3 class="text-lg font-black text-slate-900 mb-2">
+              {card.title}
+            </h3>
+
+            <p class="text-sm text-slate-600 leading-relaxed font-medium">
+              {card.desc}
+            </p>
+          </div>
+
+          <div class="mt-6 pt-4 border-t border-slate-200/60">
+            <a
+              href="#doar"
+              class="inline-flex items-center gap-1.5 text-xs font-black text-rose-900 hover:text-rose-700 transition-colors uppercase tracking-wider group"
+            >
+              <span>{lang === 'pt' ? 'Apoiar com este valor' : 'Donate this amount'}</span>
+              <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

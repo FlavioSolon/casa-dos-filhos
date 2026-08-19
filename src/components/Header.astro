@@ -1,0 +1,104 @@
+---
+import LanguageSwitcher from './LanguageSwitcher.svelte';
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: 'pt' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<header class="sticky top-0 z-40 w-full glass-header transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <!-- Brand Logo -->
+    <a href={`/${lang}`} class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-rose-800 rounded-2xl p-1">
+      <div class="w-12 h-12 relative shrink-0 transition-transform duration-300 group-hover:scale-105">
+        <img src="/images/logo.svg" alt="Casa dos Filhos Logo" class="w-full h-full object-contain" width="48" height="48" />
+      </div>
+      <div class="flex flex-col">
+        <span class="text-lg sm:text-xl font-black tracking-tight text-slate-900 leading-none group-hover:text-rose-900 transition-colors">
+          Casa dos Filhos
+        </span>
+        <span class="text-[11px] font-bold text-rose-800 tracking-wide uppercase mt-1">
+          Manaus • Amazonas
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden lg:flex items-center gap-6 text-sm font-bold text-slate-700">
+      <a href="#sobre" class="hover:text-rose-900 transition-colors">{t('nav.about')}</a>
+      <a href="#atividades" class="hover:text-rose-900 transition-colors">{t('nav.activities')}</a>
+      <a href="#impacto" class="hover:text-rose-900 transition-colors">{t('nav.impact')}</a>
+      <a href="#dados-bancarios" class="hover:text-rose-900 transition-colors">{t('nav.transparency')}</a>
+      <a href="#galeria" class="hover:text-rose-900 transition-colors">{t('nav.gallery')}</a>
+      <a href="#faq" class="hover:text-rose-900 transition-colors">{t('nav.faq')}</a>
+    </nav>
+
+    <!-- Header Actions (Language Switcher + CTA Button) -->
+    <div class="flex items-center gap-3 sm:gap-4">
+      <LanguageSwitcher client:load currentLang={lang} />
+
+      <a
+        href="#doar"
+        class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-sm shadow-md hover:shadow-lg transition-all duration-200 cursor-pointer"
+      >
+        <svg class="w-4 h-4 text-slate-950" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+        </svg>
+        <span>{t('nav.donateBtn')}</span>
+      </a>
+
+      <!-- Mobile Menu Toggle Button -->
+      <button
+        type="button"
+        id="mobile-menu-btn"
+        class="lg:hidden p-2.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors"
+        aria-label="Abrir Menu"
+      >
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Drawer Menu -->
+  <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-md border-b border-slate-200 px-6 py-5 shadow-xl animate-in slide-in-from-top duration-200">
+    <nav class="flex flex-col gap-4 text-base font-bold text-slate-800">
+      <a href="#sobre" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-rose-900">{t('nav.about')}</a>
+      <a href="#atividades" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-rose-900">{t('nav.activities')}</a>
+      <a href="#impacto" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-rose-900">{t('nav.impact')}</a>
+      <a href="#dados-bancarios" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-rose-900">{t('nav.transparency')}</a>
+      <a href="#galeria" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-rose-900">{t('nav.gallery')}</a>
+      <a href="#faq" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-rose-900">{t('nav.faq')}</a>
+      <a
+        href="#doar"
+        class="mobile-nav-link flex items-center justify-center gap-2 w-full py-3.5 mt-2 rounded-2xl bg-amber-500 text-slate-950 font-black text-center shadow-md"
+      >
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+          <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+        </svg>
+        <span>{t('nav.donateBtn')}</span>
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  const links = document.querySelectorAll('.mobile-nav-link');
+
+  btn?.addEventListener('click', () => {
+    menu?.classList.toggle('hidden');
+  });
+
+  links.forEach(link => {
+    link.addEventListener('click', () => {
+      menu?.classList.add('hidden');
+    });
+  });
+</script>

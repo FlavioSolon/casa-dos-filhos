@@ -1,0 +1,84 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-primary: #BE185D;
+  --color-brand-primary-dark: #9F1239;
+  --color-brand-primary-light: #FB7185;
+  --color-brand-accent: #F59E0B;
+  --color-brand-accent-hover: #D97706;
+  --color-brand-accent-light: #FEF3C7;
+  --color-rainbow-sky: #38BDF8;
+  --color-rainbow-mint: #34D399;
+  --color-rainbow-yellow: #FDE047;
+  --color-rainbow-coral: #FB923C;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    font-family: var(--font-sans);
+    color: #0f172a;
+    background-color: #fafaf9;
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+/* Custom Gradients & Utilities */
+.bg-rainbow-gradient {
+  background: linear-gradient(135deg, rgba(254, 242, 242, 0.9) 0%, rgba(254, 249, 195, 0.6) 25%, rgba(236, 253, 245, 0.7) 50%, rgba(240, 249, 255, 0.9) 75%, rgba(253, 242, 248, 0.9) 100%);
+}
+
+.bg-rainbow-badge {
+  background: linear-gradient(90deg, #38BDF8 0%, #34D399 25%, #FDE047 50%, #FB923C 75%, #F472B6 100%);
+}
+
+.text-gradient-brand {
+  background: linear-gradient(135deg, #BE185D 0%, #9F1239 60%, #E11D48 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-amber {
+  background: linear-gradient(135deg, #D97706 0%, #B45309 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.glass-header {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(241, 245, 249, 0.9);
+}
+
+.card-hover-effect {
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card-hover-effect:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 30px -10px rgba(190, 24, 93, 0.08), 0 10px 15px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Shimmer animation for donation copy button */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, #F59E0B 0%, #FBBF24 50%, #F59E0B 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Pulse soft badge */
+@keyframes pulseGlow {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.85; transform: scale(1.03); }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 2.5s ease-in-out infinite;
+}

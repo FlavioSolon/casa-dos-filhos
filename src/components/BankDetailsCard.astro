@@ -1,0 +1,130 @@
+---
+import { useTranslations } from '../i18n/utils';
+
+interface Props {
+  lang: 'pt' | 'en';
+}
+
+const { lang } = Astro.props;
+const t = useTranslations(lang);
+---
+
+<section id="dados-bancarios" class="py-20 bg-white border-b border-slate-200/80 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-black uppercase tracking-wider mb-3">
+        <svg class="w-4 h-4 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+        </svg>
+        <span>{t('bank.badge')}</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-black text-slate-950 tracking-tight">
+        {t('bank.title')}
+      </h2>
+      <p class="text-slate-600 text-base sm:text-lg mt-3 font-medium">
+        {t('bank.subtitle')}
+      </p>
+    </div>
+
+    <!-- Main Banking Box (Card with Bank Styling) -->
+    <div class="max-w-3xl mx-auto bg-gradient-to-b from-slate-900 via-slate-900 to-slate-950 rounded-3xl p-6 sm:p-10 text-white shadow-2xl border border-slate-800 relative overflow-hidden">
+      <!-- Decorative background lines -->
+      <div class="absolute -right-20 -top-20 w-64 h-64 rounded-full bg-rose-600/10 blur-3xl pointer-events-none"></div>
+      <div class="absolute -left-20 -bottom-20 w-64 h-64 rounded-full bg-amber-500/10 blur-3xl pointer-events-none"></div>
+
+      <!-- Top Bank Header -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-800">
+        <div class="flex items-center gap-3">
+          <div class="w-12 h-12 rounded-2xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-400 font-black text-lg">
+            S
+          </div>
+          <div>
+            <h3 class="text-xl font-black text-white">{t('bank.bankValue')}</h3>
+            <span class="text-xs text-slate-400 font-medium">Cooperativa Sicoob • Manaus/AM</span>
+          </div>
+        </div>
+
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 bg-emerald-950/80 border border-emerald-500/40 rounded-full text-emerald-400 text-xs font-bold w-fit">
+          <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+          <span>{lang === 'pt' ? 'Conta Jurídica Ativa' : 'Active Legal Non-Profit'}</span>
+        </div>
+      </div>
+
+      <!-- Bank Details Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 py-6">
+        <!-- Beneficiary -->
+        <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+          <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">{t('bank.holderLabel')}</span>
+          <span class="text-base sm:text-lg font-black text-white block mt-1">CASA DOS FILHOS</span>
+        </div>
+
+        <!-- CNPJ / PIX -->
+        <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+          <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">{t('bank.cnpjLabel')}</span>
+          <span class="text-base sm:text-lg font-mono font-bold text-amber-400 block mt-1">50.842.391/0001-60</span>
+        </div>
+
+        <!-- Agency -->
+        <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+          <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">{t('bank.agencyLabel')}</span>
+          <span class="text-base sm:text-lg font-mono font-bold text-white block mt-1">3315</span>
+        </div>
+
+        <!-- Account -->
+        <div class="p-4 rounded-2xl bg-slate-800/60 border border-slate-700/60">
+          <span class="text-xs font-bold text-slate-400 block uppercase tracking-wider">{t('bank.accountLabel')}</span>
+          <span class="text-base sm:text-lg font-mono font-bold text-white block mt-1">34221-1</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="pt-2 flex flex-col sm:flex-row items-center gap-3.5">
+        <button
+          type="button"
+          id="copy-all-bank-btn"
+          class="w-full sm:flex-1 py-3.5 px-6 rounded-2xl bg-slate-800 hover:bg-slate-700 active:bg-slate-600 text-white font-bold text-sm border border-slate-600 transition-colors flex items-center justify-center gap-2 cursor-pointer"
+        >
+          <svg class="w-4 h-4 text-amber-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
+          </svg>
+          <span id="copy-bank-text">{t('bank.copyAllBtn')}</span>
+        </button>
+
+        <a
+          href="https://wa.me/5592991764615?text=Ol%C3%A1%2C+acabei+de+fazer+uma+doa%C3%A7%C3%A3o+para+a+Casa+dos+Filhos+e+gostaria+de+enviar+meu+comprovante%21"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="w-full sm:flex-1 py-3.5 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm transition-colors flex items-center justify-center gap-2 shadow-lg"
+        >
+          <svg class="w-4 h-4 text-slate-950" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.96.524 1.769.814 2.8.814 3.18 0 5.768-2.587 5.768-5.766 0-3.18-2.588-5.766-5.772-5.766zm9.969 5.828c0 5.518-4.482 10-10 10-1.745 0-3.39-.45-4.834-1.246l-5.166 1.354 1.378-5.035c-.886-1.504-1.378-3.238-1.378-5.073 0-5.518 4.482-10 10-10 5.518 0 10 4.482 10 10z"/>
+          </svg>
+          <span>{t('bank.sendProofBtn')}</span>
+        </a>
+      </div>
+
+      <!-- Proof info notice -->
+      <p class="text-center text-xs text-slate-400 mt-4 leading-relaxed">
+        {t('bank.proofNote')}
+      </p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const copyBtn = document.getElementById('copy-all-bank-btn');
+  const copyText = document.getElementById('copy-bank-text');
+
+  copyBtn?.addEventListener('click', () => {
+    const bankDetails = `DADOS BANCÁRIOS - CASA DOS FILHOS\nFavorecido: CASA DOS FILHOS\nCNPJ: 50.842.391/0001-60\nBanco: Sicoob (756)\nAgência: 3315\nConta Corrente: 34221-1\nCidade: Manaus/AM`;
+    navigator.clipboard.writeText(bankDetails);
+    
+    if (copyText) {
+      const original = copyText.innerText;
+      copyText.innerText = 'Copiado com sucesso!';
+      setTimeout(() => {
+        copyText.innerText = original;
+      }, 3000);
+    }
+  });
+</script>
