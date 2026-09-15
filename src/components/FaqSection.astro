@@ -33,7 +33,7 @@ const t = useTranslations(lang);
       <p class="font-medium">
         {lang === 'pt' ? 'Ainda tem dúvidas? Fale diretamente com a nossa equipe:' : 'Still have questions? Chat directly with our team:'}
         <a
-          href="https://wa.me/5592991764615?text=Ol%C3%A1%2C+tenho+uma+d%C3%BAvida+sobre+a+Casa+dos+Filhos"
+          href={`https://wa.me/5592991764615?text=${lang === 'pt' ? 'Ol%C3%A1%2C+tenho+uma+d%C3%BAvida+sobre+a+Casa+dos+Filhos' : 'Hello%2C+I+have+a+question+about+Casa+dos+Filhos'}`}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-1 ml-2 font-bold text-emerald-700 hover:text-emerald-800 underline"

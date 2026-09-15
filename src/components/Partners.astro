@@ -30,8 +30,8 @@ const schemaMarkup = {
       "image": `https://casadosfilhos.org${partner.src}` // Use the actual domain in production
     }
   })),
-  "name": "Parceiros Oficiais da Casa dos Filhos",
-  "description": "Lista de empresas e organizações que apoiam e são parceiras da Casa dos Filhos."
+  "name": lang === 'pt' ? "Parceiros Oficiais da Casa dos Filhos" : "Official Partners of Casa dos Filhos",
+  "description": lang === 'pt' ? "Lista de empresas e organizações que apoiam e são parceiras da Casa dos Filhos." : "List of companies and organizations that support and are partners with Casa dos Filhos."
 };
 ---
 
@@ -58,8 +58,8 @@ const schemaMarkup = {
           <article class={`w-full h-40 md:h-48 rounded-2xl flex items-center justify-center p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${partner.darkBg ? 'bg-gray-800' : 'bg-white shadow-md'}`}>
             <img 
               src={partner.src} 
-              alt={`Logotipo oficial do parceiro ${partner.name}`}
-              title={`Parceiro: ${partner.name}`}
+              alt={lang === 'pt' ? `Logotipo oficial do parceiro ${partner.name}` : `Official logo of partner ${partner.name}`}
+              title={lang === 'pt' ? `Parceiro: ${partner.name}` : `Partner: ${partner.name}`}
               loading="lazy"
               decoding="async"
               class={`max-w-full max-h-full object-contain filter hover:brightness-110 transition-all duration-300 ${partner.scale || ''}`}

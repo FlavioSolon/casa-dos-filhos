@@ -91,7 +91,7 @@ const t = useTranslations(lang);
         <source srcset="/images/hero-kids.webp" type="image/webp" />
         <img
           src="/images/hero-kids.jpg"
-          alt="Crianças sorrindo no projeto Casa dos Filhos em Manaus"
+          alt={lang === 'pt' ? "Crianças sorrindo no projeto Casa dos Filhos em Manaus" : "Children smiling at the Casa dos Filhos project in Manaus"}
           class="w-full h-72 sm:h-96 lg:h-[460px] object-cover object-center group-hover:scale-102 transition-transform duration-700"
           loading="eager"
           decoding="async"
@@ -107,14 +107,14 @@ const t = useTranslations(lang);
       <div class="absolute bottom-6 left-6 right-6 flex flex-col sm:flex-row sm:items-end justify-between gap-4 text-white">
         <div>
           <span class="px-3 py-1 bg-rose-600 font-black text-xs uppercase tracking-wider rounded-full shadow-xs">
-            Manaus • AM
+            {lang === 'pt' ? 'Manaus • AM' : 'Manaus • Brazil'}
           </span>
           <h2 class="text-lg sm:text-2xl font-black mt-2">
-            Acolhendo, amando e cuidando de vidas todos os dias.
+            {lang === 'pt' ? 'Acolhendo, amando e cuidando de vidas todos os dias.' : 'Welcoming, loving, and caring for lives every single day.'}
           </h2>
         </div>
         <a
-          href="https://wa.me/5592991764615?text=Ol%C3%A1%2C+gostaria+de+conhecer+de+perto+a+Casa+dos+Filhos%21"
+          href={`https://wa.me/5592991764615?text=${lang === 'pt' ? 'Ol%C3%A1%2C+gostaria+de+conhecer+de+perto+a+Casa+dos+Filhos%21' : 'Hello%2C+I+would+like+to+schedule+a+visit+and+know+more+about+Casa+dos+Filhos%21'}`}
           target="_blank"
           rel="noopener noreferrer"
           class="inline-flex items-center gap-2 px-4 py-2 bg-white/20 hover:bg-white/30 backdrop-blur-md border border-white/40 rounded-xl text-xs sm:text-sm font-bold transition-colors shrink-0"
@@ -122,7 +122,7 @@ const t = useTranslations(lang);
           <svg class="w-4 h-4 text-emerald-400" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.664-.699c.96.524 1.769.814 2.8.814 3.18 0 5.768-2.587 5.768-5.766 0-3.18-2.588-5.766-5.772-5.766zm9.969 5.828c0 5.518-4.482 10-10 10-1.745 0-3.39-.45-4.834-1.246l-5.166 1.354 1.378-5.035c-.886-1.504-1.378-3.238-1.378-5.073 0-5.518 4.482-10 10-10 5.518 0 10 4.482 10 10z"/>
           </svg>
-          <span>Agendar Visita em Manaus</span>
+          <span>{lang === 'pt' ? 'Agendar Visita em Manaus' : 'Schedule a Visit'}</span>
         </a>
       </div>
     </div>

@@ -40,7 +40,7 @@ const t = useTranslations(lang);
           </div>
           <div>
             <h3 class="text-xl font-black text-white">{t('bank.bankValue')}</h3>
-            <span class="text-xs text-slate-400 font-medium">Cooperativa Sicoob • Manaus/AM</span>
+            <span class="text-xs text-slate-400 font-medium">{lang === 'pt' ? 'Cooperativa Sicoob • Manaus/AM' : 'Sicoob Cooperative • Manaus, Brazil'}</span>
           </div>
         </div>
 
@@ -91,7 +91,7 @@ const t = useTranslations(lang);
         </button>
 
         <a
-          href="https://wa.me/5592991764615?text=Ol%C3%A1%2C+acabei+de+fazer+uma+doa%C3%A7%C3%A3o+para+a+Casa+dos+Filhos+e+gostaria+de+enviar+meu+comprovante%21"
+          href={`https://wa.me/5592991764615?text=${lang === 'pt' ? 'Ol%C3%A1%2C+acabei+de+fazer+uma+doa%C3%A7%C3%A3o+para+a+Casa+dos+Filhos+e+gostaria+de+enviar+meu+comprovante%21' : 'Hello%2C+I+just+made+a+donation+to+Casa+dos+Filhos+and+would+like+to+send+my+receipt%21'}`}
           target="_blank"
           rel="noopener noreferrer"
           class="w-full sm:flex-1 py-3.5 px-6 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-sm transition-colors flex items-center justify-center gap-2 shadow-lg"
@@ -114,14 +114,19 @@ const t = useTranslations(lang);
 <script>
   const copyBtn = document.getElementById('copy-all-bank-btn');
   const copyText = document.getElementById('copy-bank-text');
+  
+  // Try to determine language from HTML lang attribute
+  const lang = document.documentElement.lang || 'pt';
 
   copyBtn?.addEventListener('click', () => {
-    const bankDetails = `DADOS BANCÁRIOS - CASA DOS FILHOS\nFavorecido: CASA DOS FILHOS\nCNPJ: 50.842.391/0001-60\nBanco: Sicoob (756)\nAgência: 3315\nConta Corrente: 34221-1\nCidade: Manaus/AM`;
-    navigator.clipboard.writeText(bankDetails);
+    const bankDetailsPt = `DADOS BANCÁRIOS - CASA DOS FILHOS\nFavorecido: CASA DOS FILHOS\nCNPJ: 50.842.391/0001-60\nBanco: Sicoob (756)\nAgência: 3315\nConta Corrente: 34221-1\nCidade: Manaus/AM`;
+    const bankDetailsEn = `BANK DETAILS - CASA DOS FILHOS\nBeneficiary: CASA DOS FILHOS\nTax ID (CNPJ): 50.842.391/0001-60\nBank: Sicoob (756)\nAgency: 3315\nAccount: 34221-1\nCity: Manaus, Brazil`;
+    
+    navigator.clipboard.writeText(lang === 'en' ? bankDetailsEn : bankDetailsPt);
     
     if (copyText) {
       const original = copyText.innerText;
-      copyText.innerText = 'Copiado com sucesso!';
+      copyText.innerText = lang === 'en' ? 'Copied successfully!' : 'Copiado com sucesso!';
       setTimeout(() => {
         copyText.innerText = original;
       }, 3000);
