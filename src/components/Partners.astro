@@ -1,0 +1,72 @@
+---
+// src/components/Partners.astro
+
+export interface Props {
+  lang?: 'pt' | 'en';
+}
+
+const { lang = 'pt' } = Astro.props;
+
+const partners = [
+  { src: "/images/parceiros/21.png", name: "Parceiro 21", darkBg: true, scale: "scale-[3]" },
+  { src: "/images/parceiros/PDF1_AVIF1.avif", name: "Parceiro PDF1 AVIF1", darkBg: false },
+  { src: "/images/parceiros/WhatsApp Image 2026-09-14 at 12.05.21.jpeg", name: "Parceiro 1", darkBg: false },
+  { src: "/images/parceiros/WhatsApp Image 2026-09-14 at 12.21.16.jpeg", name: "Parceiro 2", darkBg: false },
+  { src: "/images/parceiros/WhatsApp Image 2026-09-14 at 12.30.31.jpeg", name: "Parceiro 3", darkBg: false },
+  { src: "/images/parceiros/WhatsApp Image 2026-09-14 at 13.03.15.jpeg", name: "Parceiro 4", darkBg: false },
+  { src: "/images/parceiros/take_white_003.png", name: "Take White", darkBg: true, scale: "scale-[1.6]" }
+];
+
+// Schema markup for GEO / AEO / SEO - ItemList for Partners
+const schemaMarkup = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": partners.map((partner, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "item": {
+      "@type": "Organization",
+      "name": partner.name,
+      "image": `https://casadosfilhos.org${partner.src}` // Use the actual domain in production
+    }
+  })),
+  "name": "Parceiros Oficiais da Casa dos Filhos",
+  "description": "Lista de empresas e organizações que apoiam e são parceiras da Casa dos Filhos."
+};
+---
+
+<section id="parceiros" class="py-20 bg-gray-50" aria-labelledby="partners-heading">
+  <div class="container mx-auto px-4 md:px-8 max-w-7xl">
+    <div class="text-center mb-16">
+      <h2 id="partners-heading" class="text-3xl md:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
+        {lang === 'en' ? 'Our ' : 'Nossos '}<span class="text-primary-600">{lang === 'en' ? 'Partners' : 'Parceiros'}</span>
+      </h2>
+      <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+        {lang === 'en' 
+          ? 'We deeply appreciate the support of the brands that believe in and strengthen our mission to transform lives.' 
+          : 'Agradecemos imensamente o apoio das marcas que acreditam e fortalecem nossa missão de transformar vidas.'}
+      </p>
+    </div>
+
+    <!-- JSON-LD Schema -->
+    <script type="application/ld+json" set:html={JSON.stringify(schemaMarkup)} />
+
+    <!-- Grid de Parceiros -->
+    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 items-center justify-items-center">
+      {partners.map((partner) => {
+        return (
+          <article class={`w-full h-40 md:h-48 rounded-2xl flex items-center justify-center p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${partner.darkBg ? 'bg-gray-800' : 'bg-white shadow-md'}`}>
+            <img 
+              src={partner.src} 
+              alt={`Logotipo oficial do parceiro ${partner.name}`}
+              title={`Parceiro: ${partner.name}`}
+              loading="lazy"
+              decoding="async"
+              class={`max-w-full max-h-full object-contain filter hover:brightness-110 transition-all duration-300 ${partner.scale || ''}`}
+            />
+          </article>
+        )
+      })}
+    </div>
+  </div>
+</section>

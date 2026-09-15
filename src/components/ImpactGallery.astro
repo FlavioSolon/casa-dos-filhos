@@ -28,7 +28,7 @@ const gallery = [
     imgHeight: 768
   },
   {
-    img: '/images/activity-sports.jpg',
+    img: ['/images/activity-sports-jiujitsu.jpg', '/images/activity-sports-ballet.jpg'],
     title: lang === 'pt' ? 'Jiu-Jitsu & Balé' : 'Jiu-Jitsu & Ballet',
     desc: lang === 'pt' ? 'Disciplina, respeito e desenvolvimento motor' : 'Discipline, respect, and physical growth',
     colSpan: 'md:col-span-1',
@@ -75,23 +75,43 @@ const gallery = [
     <!-- Masonry/Bento Photo Grid -->
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
       {gallery.map((item) => (
-        <div class={`relative rounded-3xl overflow-hidden shadow-md group ${item.colSpan} ${item.height}`}>
-          <picture>
-            <source srcset={item.img.replace('.jpg', '.avif')} type="image/avif" />
-            <source srcset={item.img.replace('.jpg', '.webp')} type="image/webp" />
-            <img
-              src={item.img}
-              alt={item.title}
-              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-              loading="lazy"
-              decoding="async"
-              width={item.width}
-              height={item.imgHeight}
-            />
-          </picture>
-          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent opacity-90 transition-opacity pointer-events-none"></div>
+        <div class={`relative rounded-3xl overflow-hidden shadow-md group flex ${item.colSpan} ${item.height}`}>
+          {Array.isArray(item.img) ? (
+            item.img.map(imgPath => (
+              <div class="w-1/2 h-full relative overflow-hidden border-r border-white/20 last:border-0">
+                <picture class="w-full h-full block">
+                  <source srcset={imgPath.replace('.jpg', '.avif')} type="image/avif" />
+                  <source srcset={imgPath.replace('.jpg', '.webp')} type="image/webp" />
+                  <img
+                    src={imgPath}
+                    alt={item.title}
+                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 origin-center"
+                    loading="lazy"
+                    decoding="async"
+                    width={item.width / 2}
+                    height={item.imgHeight}
+                  />
+                </picture>
+              </div>
+            ))
+          ) : (
+            <picture class="w-full h-full absolute inset-0">
+              <source srcset={item.img.replace('.jpg', '.avif')} type="image/avif" />
+              <source srcset={item.img.replace('.jpg', '.webp')} type="image/webp" />
+              <img
+                src={item.img}
+                alt={item.title}
+                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 origin-center"
+                loading="lazy"
+                decoding="async"
+                width={item.width}
+                height={item.imgHeight}
+              />
+            </picture>
+          )}
+          <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-90 transition-opacity pointer-events-none z-10"></div>
           
-          <div class="absolute bottom-5 left-5 right-5 text-white">
+          <div class="absolute bottom-5 left-5 right-5 text-white z-20">
             <h3 class="text-base sm:text-lg font-black">{item.title}</h3>
             <p class="text-xs sm:text-sm text-slate-200 mt-1 font-medium">{item.desc}</p>
           </div>

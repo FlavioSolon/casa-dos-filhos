@@ -59,7 +59,7 @@
       if (selectedAmount <= 50) return 'Garante material escolar completo, livros e apostilas de reforço.';
       if (selectedAmount <= 120) return 'Garante kimono/uniforme e 1 mês completo de aulas de Jiu-Jitsu ou Balé.';
       if (selectedAmount <= 250) return 'Garante cesta de alimentos completa para a família de uma criança assistida.';
-      return 'Apoio integral aos custos diários de alimentação e oficinas educativas em Manaus.';
+      return 'Garante a manutenção das despesas, alimentação e materiais gerais.';
     }
   });
 </script>

@@ -7,6 +7,7 @@ import ActivitiesGrid from '../../components/ActivitiesGrid.astro';
 import BankDetailsCard from '../../components/BankDetailsCard.astro';
 import ImpactGallery from '../../components/ImpactGallery.astro';
 import FaqSection from '../../components/FaqSection.astro';
+import Partners from '../../components/Partners.astro';
 
 export function getStaticPaths() {
   return [
@@ -25,5 +26,6 @@ const { lang } = Astro.params as { lang: 'pt' | 'en' };
   <ActivitiesGrid lang={lang} />
   <BankDetailsCard lang={lang} />
   <ImpactGallery lang={lang} />
+  <Partners lang={lang} />
   <FaqSection lang={lang} />
 </BaseLayout>
