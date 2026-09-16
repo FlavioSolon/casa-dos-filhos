@@ -26,11 +26,11 @@
   }
 </script>
 
-<div class="inline-flex items-center p-1 bg-slate-100/90 rounded-full border border-slate-200/80 shadow-xs" role="group" aria-label="Language selector">
+<div class="inline-flex items-center p-1 bg-slate-100/90 rounded-full border border-slate-200/80 shadow-xs gap-1" role="group" aria-label="Language selector">
   <button
     type="button"
     onclick={() => switchLanguage('pt')}
-    class="flex items-center gap-1.5 px-3 py-1 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer {currentLang === 'pt' ? 'bg-white text-rose-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'}"
+    class="flex items-center justify-center gap-1.5 px-3 py-2 min-h-[44px] min-w-[44px] text-xs font-bold rounded-full transition-all duration-200 cursor-pointer {currentLang === 'pt' ? 'bg-white text-rose-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'}"
     aria-pressed={currentLang === 'pt'}
     aria-label="Mudar para Português"
   >
@@ -40,7 +40,7 @@
   <button
     type="button"
     onclick={() => switchLanguage('en')}
-    class="flex items-center gap-1.5 px-3 py-1 text-xs font-bold rounded-full transition-all duration-200 cursor-pointer {currentLang === 'en' ? 'bg-white text-rose-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'}"
+    class="flex items-center justify-center gap-1.5 px-3 py-2 min-h-[44px] min-w-[44px] text-xs font-bold rounded-full transition-all duration-200 cursor-pointer {currentLang === 'en' ? 'bg-white text-rose-900 shadow-sm' : 'text-slate-500 hover:text-slate-800'}"
     aria-pressed={currentLang === 'en'}
     aria-label="Switch to English"
   >

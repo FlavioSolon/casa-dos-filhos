@@ -28,18 +28,14 @@ const partners = [
 const schemaMarkup = {
   "@context": "https://schema.org",
   "@type": "ItemList",
+  "name": lang === 'pt' ? "Parceiros Oficiais da Casa dos Filhos" : "Official Partners of Casa dos Filhos",
+  "description": lang === 'pt' ? "Lista de empresas e organizações que apoiam a Casa dos Filhos." : "List of companies supporting Casa dos Filhos.",
   "itemListElement": partners.map((partner, index) => ({
     "@type": "ListItem",
     "position": index + 1,
-    "item": {
-      "@type": "Organization",
-      "name": partner.name,
-      "url": `https://casadosfilhos.com/`,
-      "image": `https://casadosfilhos.com${partner.img.src}`
-    }
-  })),
-  "name": lang === 'pt' ? "Parceiros Oficiais da Casa dos Filhos" : "Official Partners of Casa dos Filhos",
-  "description": lang === 'pt' ? "Lista de empresas e organizações que apoiam e são parceiras da Casa dos Filhos." : "List of companies and organizations that support and are partners with Casa dos Filhos."
+    "name": partner.name,
+    "url": "https://casadosfilhos.com/#parceiros"
+  }))
 };
 ---
 
