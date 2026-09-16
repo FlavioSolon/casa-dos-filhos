@@ -1,5 +1,12 @@
 ---
-// src/components/Partners.astro
+import { Image } from 'astro:assets';
+import p21 from '../assets/images/parceiros/partner-21.png';
+import pAvif from '../assets/images/parceiros/PDF1_AVIF1.avif';
+import p1 from '../assets/images/parceiros/partner-1.jpeg';
+import p2 from '../assets/images/parceiros/partner-2.jpeg';
+import p3 from '../assets/images/parceiros/partner-3.jpeg';
+import p4 from '../assets/images/parceiros/partner-4.jpeg';
+import pTake from '../assets/images/parceiros/partner-take.png';
 
 export interface Props {
   lang?: 'pt' | 'en';
@@ -8,13 +15,13 @@ export interface Props {
 const { lang = 'pt' } = Astro.props;
 
 const partners = [
-  { src: "/images/parceiros/21.png", name: "Parceiro 21", darkBg: true, scale: "scale-[3]" },
-  { src: "/images/parceiros/PDF1_AVIF1.avif", name: "Parceiro PDF1 AVIF1", darkBg: false },
-  { src: "/images/parceiros/WhatsApp Image 2026-09-14 at 12.05.21.jpeg", name: "Parceiro 1", darkBg: false },
-  { src: "/images/parceiros/WhatsApp Image 2026-09-14 at 12.21.16.jpeg", name: "Parceiro 2", darkBg: false },
-  { src: "/images/parceiros/WhatsApp Image 2026-09-14 at 12.30.31.jpeg", name: "Parceiro 3", darkBg: false },
-  { src: "/images/parceiros/WhatsApp Image 2026-09-14 at 13.03.15.jpeg", name: "Parceiro 4", darkBg: false },
-  { src: "/images/parceiros/take_white_003.png", name: "Take White", darkBg: true, scale: "scale-[1.6]" }
+  { img: p21, name: "Parceiro 21", darkBg: true, scale: "scale-[3]" },
+  { img: pAvif, name: "Parceiro PDF1 AVIF1", darkBg: false },
+  { img: p1, name: "Parceiro 1", darkBg: false },
+  { img: p2, name: "Parceiro 2", darkBg: false },
+  { img: p3, name: "Parceiro 3", darkBg: false },
+  { img: p4, name: "Parceiro 4", darkBg: false },
+  { img: pTake, name: "Take White", darkBg: true, scale: "scale-[1.6]" }
 ];
 
 // Schema markup for GEO / AEO / SEO - ItemList for Partners
@@ -28,7 +35,7 @@ const schemaMarkup = {
       "@type": "Organization",
       "name": partner.name,
       "url": `https://casadosfilhos.com/`,
-      "image": `https://casadosfilhos.com${partner.src}`
+      "image": `https://casadosfilhos.com${partner.img.src}`
     }
   })),
   "name": lang === 'pt' ? "Parceiros Oficiais da Casa dos Filhos" : "Official Partners of Casa dos Filhos",
@@ -57,8 +64,8 @@ const schemaMarkup = {
       {partners.map((partner) => {
         return (
           <article class={`w-full h-40 md:h-48 rounded-2xl flex items-center justify-center p-6 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${partner.darkBg ? 'bg-gray-800' : 'bg-white shadow-md'}`}>
-            <img 
-              src={partner.src} 
+            <Image 
+              src={partner.img} 
               alt={lang === 'pt' ? `Logotipo oficial do parceiro ${partner.name}` : `Official logo of partner ${partner.name}`}
               title={lang === 'pt' ? `Parceiro: ${partner.name}` : `Partner: ${partner.name}`}
               loading="lazy"

@@ -1,6 +1,8 @@
 ---
 import DonationWidget from './DonationWidget.svelte';
 import { useTranslations } from '../i18n/utils';
+import { Image } from 'astro:assets';
+import heroKidsImg from '../assets/images/hero-kids.jpg';
 
 interface Props {
   lang: 'pt' | 'en';
@@ -86,20 +88,14 @@ const t = useTranslations(lang);
 
     <!-- Hero Image Banner with Rainbow Border Frame -->
     <div class="mt-14 relative rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-slate-900 group">
-      <picture>
-        <source srcset="/images/hero-kids.avif" type="image/avif" />
-        <source srcset="/images/hero-kids.webp" type="image/webp" />
-        <img
-          src="/images/hero-kids.jpg"
-          alt={lang === 'pt' ? "Crianças sorrindo no projeto Casa dos Filhos em Manaus" : "Children smiling at the Casa dos Filhos project in Manaus"}
-          class="w-full h-72 sm:h-96 lg:h-[460px] object-cover object-center group-hover:scale-102 transition-transform duration-700"
-          loading="eager"
-          decoding="async"
-          fetchpriority="high"
-          width="1376"
-          height="768"
-        />
-      </picture>
+      <Image
+        src={heroKidsImg}
+        alt={lang === 'pt' ? "Crianças sorrindo no projeto Casa dos Filhos em Manaus" : "Children smiling at the Casa dos Filhos project in Manaus"}
+        class="w-full h-72 sm:h-96 lg:h-[460px] object-cover object-center group-hover:scale-102 transition-transform duration-700"
+        loading="eager"
+        decoding="async"
+        fetchpriority="high"
+      />
       <!-- Gradient overlay for text readability -->
       <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-slate-950/20 to-transparent pointer-events-none"></div>
       

@@ -1,5 +1,12 @@
 ---
 import { useTranslations } from '../i18n/utils';
+import { Image } from 'astro:assets';
+import volunteersImg from '../assets/images/gallery-volunteers.jpg';
+import heroKidsImg from '../assets/images/hero-kids.jpg';
+import jiujitsuImg from '../assets/images/activity-sports-jiujitsu.jpg';
+import balletImg from '../assets/images/activity-sports-ballet.jpg';
+import educationImg from '../assets/images/activity-education.jpg';
+import foodImg from '../assets/images/activity-food.jpg';
 
 interface Props {
   lang: 'pt' | 'en';
@@ -10,49 +17,39 @@ const t = useTranslations(lang);
 
 const gallery = [
   {
-    img: '/images/gallery-volunteers.jpg',
+    images: [volunteersImg],
     title: lang === 'pt' ? 'Mural Comunitário com Voluntários' : 'Community Mural with Volunteers',
     desc: lang === 'pt' ? 'Arte e união transformando a comunidade em Manaus' : 'Art and solidarity in Manaus',
     colSpan: 'md:col-span-2 md:row-span-2',
     height: 'h-80 md:h-[480px]',
-    width: 1200,
-    imgHeight: 896
   },
   {
-    img: '/images/hero-kids.jpg',
+    images: [heroKidsImg],
     title: lang === 'pt' ? 'Sorrisos e Acolhimento' : 'Smiles and Loving Care',
     desc: lang === 'pt' ? 'Mais de 80 crianças atendidas semanalmente' : 'Over 80 children supported weekly',
     colSpan: 'md:col-span-1',
     height: 'h-60 md:h-[230px]',
-    width: 1376,
-    imgHeight: 768
   },
   {
-    img: ['/images/activity-sports-jiujitsu.jpg', '/images/activity-sports-ballet.jpg'],
+    images: [jiujitsuImg, balletImg],
     title: lang === 'pt' ? 'Jiu-Jitsu & Balé' : 'Jiu-Jitsu & Ballet',
     desc: lang === 'pt' ? 'Disciplina, respeito e desenvolvimento motor' : 'Discipline, respect, and physical growth',
     colSpan: 'md:col-span-1',
     height: 'h-60 md:h-[230px]',
-    width: 1200,
-    imgHeight: 896
   },
   {
-    img: '/images/activity-education.jpg',
+    images: [educationImg],
     title: lang === 'pt' ? 'Reforço Escolar e Idiomas' : 'Tutoring & Languages',
     desc: lang === 'pt' ? 'Aulas de Português, Inglês e Espanhol' : 'English, Spanish and School Tutoring',
     colSpan: 'md:col-span-1',
     height: 'h-60 md:h-[230px]',
-    width: 1200,
-    imgHeight: 896
   },
   {
-    img: '/images/activity-food.jpg',
+    images: [foodImg],
     title: lang === 'pt' ? 'Segurança Alimentar' : 'Nutritious Meals',
     desc: lang === 'pt' ? 'Refeições completas com frutas frescas' : 'Balanced daily nutrition',
     colSpan: 'md:col-span-1',
     height: 'h-60 md:h-[230px]',
-    width: 1200,
-    imgHeight: 896
   },
 ];
 ---
@@ -76,39 +73,17 @@ const gallery = [
     <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
       {gallery.map((item) => (
         <div class={`relative rounded-3xl overflow-hidden shadow-md group flex ${item.colSpan} ${item.height}`}>
-          {Array.isArray(item.img) ? (
-            item.img.map(imgPath => (
-              <div class="w-1/2 h-full relative overflow-hidden border-r border-white/20 last:border-0">
-                <picture class="w-full h-full block">
-                  <source srcset={imgPath.replace('.jpg', '.avif')} type="image/avif" />
-                  <source srcset={imgPath.replace('.jpg', '.webp')} type="image/webp" />
-                  <img
-                    src={imgPath}
-                    alt={item.title}
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 origin-center"
-                    loading="lazy"
-                    decoding="async"
-                    width={item.width / 2}
-                    height={item.imgHeight}
-                  />
-                </picture>
-              </div>
-            ))
-          ) : (
-            <picture class="w-full h-full absolute inset-0">
-              <source srcset={item.img.replace('.jpg', '.avif')} type="image/avif" />
-              <source srcset={item.img.replace('.jpg', '.webp')} type="image/webp" />
-              <img
-                src={item.img}
-                alt={item.title}
+          {item.images.map((imgAsset) => (
+            <div class={`h-full relative overflow-hidden border-r border-white/20 last:border-0 ${item.images.length > 1 ? 'w-1/2' : 'w-full'}`}>
+              <Image
+                src={imgAsset}
+                alt={lang === 'pt' ? `Galeria Casa dos Filhos: ${item.title} - ${item.desc}` : `Casa dos Filhos Gallery: ${item.title} - ${item.desc}`}
                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 origin-center"
                 loading="lazy"
                 decoding="async"
-                width={item.width}
-                height={item.imgHeight}
               />
-            </picture>
-          )}
+            </div>
+          ))}
           <div class="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/20 to-transparent opacity-90 transition-opacity pointer-events-none z-10"></div>
           
           <div class="absolute bottom-5 left-5 right-5 text-white z-20">

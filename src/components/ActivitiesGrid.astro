@@ -1,5 +1,11 @@
 ---
 import { useTranslations } from '../i18n/utils';
+import { Image } from 'astro:assets';
+import educationImg from '../assets/images/activity-education.jpg';
+import jiujitsuImg from '../assets/images/activity-sports-jiujitsu.jpg';
+import balletImg from '../assets/images/activity-sports-ballet.jpg';
+import chessImg from '../assets/images/activity-chess.jpg';
+import foodImg from '../assets/images/activity-food.jpg';
 
 interface Props {
   lang: 'pt' | 'en';
@@ -12,7 +18,7 @@ const activities = [
   {
     title: t('activities.pilar1.title'),
     desc: t('activities.pilar1.desc'),
-    img: '/images/activity-education.jpg',
+    images: [educationImg],
     tags: lang === 'pt' ? ['Reforço Escolar', 'Inglês', 'Espanhol', 'Leitura'] : ['School Tutoring', 'English', 'Spanish', 'Reading'],
     badgeColor: 'bg-sky-500 text-white',
     badgeText: lang === 'pt' ? 'Pilar 01' : 'Pillar 01'
@@ -20,7 +26,7 @@ const activities = [
   {
     title: t('activities.pilar2.title'),
     desc: t('activities.pilar2.desc'),
-    img: ['/images/activity-sports-jiujitsu.jpg', '/images/activity-sports-ballet.jpg'],
+    images: [jiujitsuImg, balletImg],
     tags: lang === 'pt' ? ['Jiu-Jitsu', 'Balé Clássico', 'Educação Física'] : ['Jiu-Jitsu', 'Ballet', 'Physical Ed'],
     badgeColor: 'bg-amber-500 text-slate-950',
     badgeText: lang === 'pt' ? 'Pilar 02' : 'Pillar 02'
@@ -28,7 +34,7 @@ const activities = [
   {
     title: t('activities.pilar3.title'),
     desc: t('activities.pilar3.desc'),
-    img: '/images/activity-chess.jpg',
+    images: [chessImg],
     tags: lang === 'pt' ? ['Xadrez', 'Raciocínio Lógico', 'Aulas Bíblicas', 'Ética'] : ['Chess', 'Logic & Strategy', 'Bible Stories', 'Ethics'],
     badgeColor: 'bg-emerald-600 text-white',
     badgeText: lang === 'pt' ? 'Pilar 03' : 'Pillar 03'
@@ -36,7 +42,7 @@ const activities = [
   {
     title: t('activities.pilar4.title'),
     desc: t('activities.pilar4.desc'),
-    img: '/images/activity-food.jpg',
+    images: [foodImg],
     tags: lang === 'pt' ? ['Alimentação Saudável', 'Frutas Frescas', 'Cestas Básicas'] : ['Nutritious Meals', 'Fresh Fruits', 'Food Hampers'],
     badgeColor: 'bg-rose-800 text-white',
     badgeText: lang === 'pt' ? 'Pilar 04' : 'Pillar 04'
@@ -65,37 +71,17 @@ const activities = [
         <div class="bg-white rounded-3xl overflow-hidden border border-slate-200/80 shadow-md hover:shadow-xl transition-all duration-300 flex flex-col group">
           <!-- Image container with subtle zoom -->
           <div class="relative h-64 sm:h-72 overflow-hidden bg-slate-100 flex">
-            {Array.isArray(item.img) ? (
-              item.img.map((imgPath) => (
-                <picture class="w-1/2 h-full border-r-2 border-white/30 last:border-0 relative">
-                  <source srcset={imgPath.replace('.jpg', '.avif')} type="image/avif" />
-                  <source srcset={imgPath.replace('.jpg', '.webp')} type="image/webp" />
-                  <img
-                    src={imgPath}
-                    alt={item.title}
-                    class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                    loading="lazy"
-                    decoding="async"
-                    width="300"
-                    height="448"
-                  />
-                </picture>
-              ))
-            ) : (
-              <picture class="w-full h-full">
-                <source srcset={item.img.replace('.jpg', '.avif')} type="image/avif" />
-                <source srcset={item.img.replace('.jpg', '.webp')} type="image/webp" />
-                <img
-                  src={item.img}
-                  alt={item.title}
+            {item.images.map((imgAsset) => (
+              <div class={`h-full border-r-2 border-white/30 last:border-0 relative ${item.images.length > 1 ? 'w-1/2' : 'w-full'}`}>
+                <Image
+                  src={imgAsset}
+                  alt={lang === 'pt' ? `Atividade de ${item.title} realizada na Casa dos Filhos em Manaus` : `${item.title} activity at Casa dos Filhos project in Manaus`}
                   class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                   loading="lazy"
                   decoding="async"
-                  width="600"
-                  height="448"
                 />
-              </picture>
-            )}
+              </div>
+            ))}
             <div class="absolute top-4 left-4 z-10">
               <span class={`px-3 py-1 rounded-full text-xs font-black uppercase tracking-wider shadow-sm ${item.badgeColor}`}>
                 {item.badgeText}

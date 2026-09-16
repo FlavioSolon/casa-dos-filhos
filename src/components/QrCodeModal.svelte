@@ -1,10 +1,10 @@
 <script lang="ts">
   import QRCode from 'qrcode';
-  import { generatePixPayload } from '../utils/pix';
+  import { generatePixPayload, formatCurrencyBrl, parseBrlAmount } from '../utils/pix';
 
   interface Props {
     isOpen: boolean;
-    amount?: number;
+    amount?: number | string;
     lang?: 'pt' | 'en';
     onClose: () => void;
   }
@@ -14,42 +14,73 @@
   let qrDataUrl = $state<string>('');
   let pixPayload = $state<string>('');
   let copied = $state<boolean>(false);
+  let qrError = $state<boolean>(false);
   let copyTimeout: number;
+
+  let cleanAmount = $derived(parseBrlAmount(amount));
+  let formattedAmountStr = $derived(formatCurrencyBrl(cleanAmount, lang));
 
   $effect(() => {
     if (isOpen) {
-      const payload = generatePixPayload('50842391000160', 'CASA DOS FILHOS', 'MANAUS', amount > 0 ? amount : undefined);
-      pixPayload = payload;
-      QRCode.toDataURL(payload, {
-        width: 320,
-        margin: 2,
-        color: {
-          dark: '#0F172A',
-          light: '#FFFFFF',
-        },
-        errorCorrectionLevel: 'M',
-      }).then((url: string) => {
-        qrDataUrl = url;
-      });
-      // Prevent body scroll when modal is open
-      document.body.style.overflow = 'hidden';
+      qrError = false;
+      if (typeof window !== 'undefined' && document.body) {
+        document.body.style.overflow = 'hidden';
+      }
+      
+      try {
+        const payload = generatePixPayload('50842391000160', 'CASA DOS FILHOS', 'MANAUS', cleanAmount);
+        pixPayload = payload;
+
+        if (payload) {
+          QRCode.toDataURL(payload, {
+            width: 320,
+            margin: 2,
+            color: {
+              dark: '#0F172A',
+              light: '#FFFFFF',
+            },
+            errorCorrectionLevel: 'M',
+          })
+            .then((url: string) => {
+              qrDataUrl = url;
+            })
+            .catch((err: unknown) => {
+              console.error('QRCode.toDataURL error:', err);
+              qrError = true;
+              qrDataUrl = '';
+            });
+        }
+      } catch (err) {
+        console.error('Error generating QR payload:', err);
+        qrError = true;
+      }
     } else {
-      document.body.style.overflow = '';
+      if (typeof window !== 'undefined' && document.body) {
+        document.body.style.overflow = '';
+      }
     }
 
     return () => {
-      document.body.style.overflow = '';
+      if (typeof window !== 'undefined' && document.body) {
+        document.body.style.overflow = '';
+      }
     };
   });
 
   function copyPixCode() {
     if (!pixPayload) return;
-    navigator.clipboard.writeText(pixPayload);
-    copied = true;
-    clearTimeout(copyTimeout);
-    copyTimeout = window.setTimeout(() => {
-      copied = false;
-    }, 3000);
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        navigator.clipboard.writeText(pixPayload);
+      }
+      copied = true;
+      clearTimeout(copyTimeout);
+      copyTimeout = window.setTimeout(() => {
+        copied = false;
+      }, 3500);
+    } catch (err) {
+      console.error('Failed to copy PIX code:', err);
+    }
   }
 
   function handleKeydown(e: KeyboardEvent) {
@@ -107,23 +138,25 @@
           {lang === 'pt' ? 'Aponte a câmera do seu banco para transferir' : 'Scan using your banking app to donate'}
         </p>
 
-        {#if amount > 0}
-          <div class="mt-3 inline-block bg-amber-400 text-amber-950 px-3.5 py-1 rounded-full text-xs font-bold shadow-xs">
-            {lang === 'pt' ? `Valor sugerido: R$ ${amount},00` : `Suggested amount: R$ ${amount}.00`}
-          </div>
-        {/if}
+        <div class="mt-3 inline-block bg-amber-400 text-amber-950 px-3.5 py-1 rounded-full text-xs font-bold shadow-xs">
+          {lang === 'pt' ? `QR Code gerado para ${formattedAmountStr}` : `QR Code generated for ${formattedAmountStr}`}
+        </div>
       </div>
 
       <!-- Body with QR Code Image -->
       <div class="p-6 flex flex-col items-center">
         <!-- QR Container with frame -->
-        <div class="relative p-4 bg-white border-2 border-dashed border-rose-200 rounded-2xl shadow-inner flex items-center justify-center min-h-[220px]">
+        <div class="relative p-4 bg-white border-2 border-dashed border-rose-200 rounded-2xl shadow-inner flex items-center justify-center min-h-[220px] w-full">
           {#if qrDataUrl}
-            <img src={qrDataUrl} alt="QR Code PIX Casa dos Filhos" class="w-52 h-52 object-contain" />
+            <img src={qrDataUrl} alt={`QR Code PIX Casa dos Filhos - ${formattedAmountStr}`} class="w-52 h-52 object-contain" />
+          {:else if qrError}
+            <div class="text-center text-xs text-rose-600 font-semibold p-4">
+              {lang === 'pt' ? 'Não foi possível gerar a imagem do QR Code. Utilize a chave PIX ou o código Copia e Cola abaixo.' : 'Could not render QR image. Please use the PIX key or Copy & Paste code below.'}
+            </div>
           {:else}
             <div class="flex flex-col items-center gap-2 text-slate-400">
               <div class="w-8 h-8 border-3 border-rose-500 border-t-transparent rounded-full animate-spin"></div>
-              <span class="text-xs font-medium">Gerando QR Code...</span>
+              <span class="text-xs font-medium">{lang === 'pt' ? 'Gerando QR Code...' : 'Generating QR Code...'}</span>
             </div>
           {/if}
         </div>
@@ -139,8 +172,8 @@
             <span class="font-mono font-semibold text-rose-900">50.842.391/0001-60</span>
           </div>
           <div class="flex justify-between items-center text-slate-600">
-            <span class="font-medium text-slate-500">{lang === 'pt' ? 'Banco:' : 'Bank:'}</span>
-            <span class="font-semibold text-slate-800">Sicoob (756) • Manaus/AM</span>
+            <span class="font-medium text-slate-500">{lang === 'pt' ? 'Valor Embutido:' : 'Embedded Value:'}</span>
+            <span class="font-bold text-emerald-700">{formattedAmountStr}</span>
           </div>
         </div>
 
@@ -149,7 +182,7 @@
           <button
             type="button"
             onclick={copyPixCode}
-            class="w-full flex items-center justify-center gap-2 py-3 px-4 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-slate-950 font-bold text-sm rounded-xl shadow-md transition-all duration-150 cursor-pointer"
+            class="w-full flex items-center justify-center gap-2 py-3.5 px-4 bg-amber-500 hover:bg-amber-600 active:bg-amber-700 text-slate-950 font-bold text-sm rounded-xl shadow-md transition-all duration-150 cursor-pointer"
           >
             {#if copied}
               <svg class="w-5 h-5 text-emerald-950" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -160,7 +193,7 @@
               <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
               </svg>
-              <span>{lang === 'pt' ? 'Copiar Código PIX Copia e Cola' : 'Copy PIX Paste Code'}</span>
+              <span>{lang === 'pt' ? `Copiar PIX Copia e Cola (${formattedAmountStr})` : `Copy PIX Code (${formattedAmountStr})`}</span>
             {/if}
           </button>
         </div>

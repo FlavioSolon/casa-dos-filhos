@@ -1,5 +1,6 @@
 <script lang="ts">
   import QrCodeModal from './QrCodeModal.svelte';
+  import { generatePixPayload, formatCurrencyBrl, parseBrlAmount } from '../utils/pix';
 
   interface Props {
     lang?: 'pt' | 'en';
@@ -7,21 +8,22 @@
 
   let { lang = 'pt' }: Props = $props();
 
-  let selectedAmount = $state<number>(50);
+  let selectedAmount = $state<number>(60);
   let customAmount = $state<string>('');
   let isCustom = $state<boolean>(false);
   let isModalOpen = $state<boolean>(false);
-  let copied = $state<boolean>(false);
-  let copyTimeout: number;
+  let copiedPayload = $state<boolean>(false);
+  let copiedKey = $state<boolean>(false);
+  let copyTimeoutPayload: number;
+  let copyTimeoutKey: number;
 
-  const pixKeyClean = '50842391000160';
   const pixKeyFormatted = '50.842.391/0001-60';
 
   const presets = [
-    { value: 20, pt: 'R$ 20', en: '$4 / R$20' },
-    { value: 50, pt: 'R$ 50', en: '$10 / R$50', popular: true },
-    { value: 100, pt: 'R$ 100', en: '$20 / R$100' },
-    { value: 250, pt: 'R$ 250', en: '$50 / R$250' },
+    { value: 30, pt: 'R$ 30', en: '$6 / R$30' },
+    { value: 60, pt: 'R$ 60', en: '$12 / R$60', popular: true },
+    { value: 120, pt: 'R$ 120', en: '$24 / R$120' },
+    { value: 300, pt: 'R$ 300', en: '$60 / R$300' },
   ];
 
   function selectPreset(val: number) {
@@ -30,51 +32,121 @@
     customAmount = '';
   }
 
-  function handleCustomInput(e: Event) {
-    const target = e.target as HTMLInputElement;
-    const val = target.value.replace(/\D/g, '');
-    customAmount = val;
-    isCustom = true;
-    selectedAmount = val ? parseInt(val, 10) : 0;
+  function selectAmount(val: number) {
+    selectedAmount = val;
+    const matchPreset = presets.find((p) => p.value === val);
+    if (matchPreset) {
+      isCustom = false;
+      customAmount = '';
+    } else {
+      isCustom = true;
+      customAmount = val > 0 ? val.toString() : '';
+    }
   }
 
-  function copyPixKey() {
-    navigator.clipboard.writeText(pixKeyFormatted);
-    copied = true;
-    clearTimeout(copyTimeout);
-    copyTimeout = window.setTimeout(() => {
-      copied = false;
-    }, 3500);
+  function handleCustomInput(e: Event) {
+    const target = e.target as HTMLInputElement;
+    const rawVal = target.value;
+    customAmount = rawVal;
+    isCustom = true;
+    selectedAmount = parseBrlAmount(rawVal);
+  }
+
+  $effect(() => {
+    function handleSelectAmountEvent(e: Event) {
+      const customEv = e as CustomEvent<{ amount: number }>;
+      if (customEv.detail && typeof customEv.detail.amount === 'number') {
+        selectAmount(customEv.detail.amount);
+      }
+    }
+
+    if (typeof window !== 'undefined') {
+      window.addEventListener('select-donation-amount', handleSelectAmountEvent);
+    }
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        window.removeEventListener('select-donation-amount', handleSelectAmountEvent);
+      }
+    };
+  });
+
+  let formattedAmountStr = $derived(formatCurrencyBrl(selectedAmount, lang));
+
+  let currentPixPayload = $derived.by(() => {
+    try {
+      return generatePixPayload('50842391000160', 'CASA DOS FILHOS', 'MANAUS', selectedAmount);
+    } catch (err) {
+      console.error('Error generating dynamic PIX payload:', err);
+      return '';
+    }
+  });
+
+  function copyPixPayload() {
+    try {
+      const codeToCopy = currentPixPayload || pixKeyFormatted;
+      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        navigator.clipboard.writeText(codeToCopy);
+      }
+      copiedPayload = true;
+      clearTimeout(copyTimeoutPayload);
+      copyTimeoutPayload = window.setTimeout(() => {
+        copiedPayload = false;
+      }, 3500);
+    } catch (err) {
+      console.error('Failed to copy PIX payload:', err);
+    }
+  }
+
+  function copyPixKeyOnly() {
+    try {
+      if (typeof navigator !== 'undefined' && navigator.clipboard) {
+        navigator.clipboard.writeText(pixKeyFormatted);
+      }
+      copiedKey = true;
+      clearTimeout(copyTimeoutKey);
+      copyTimeoutKey = window.setTimeout(() => {
+        copiedKey = false;
+      }, 3500);
+    } catch (err) {
+      console.error('Failed to copy PIX key:', err);
+    }
   }
 
   let currentImpact = $derived.by(() => {
     if (lang === 'en') {
-      if (selectedAmount <= 20) return 'Provides healthy snacks and fresh fruit for 1 child for an entire week.';
-      if (selectedAmount <= 50) return 'Provides full school supplies, notebooks, and learning books for classes.';
+      if (selectedAmount <= 30) return 'Provides healthy lunch and fresh fruit snacks for 1 child for an entire week.';
+      if (selectedAmount <= 60) return 'Provides complete school supplies, notebooks, and learning books for classes.';
       if (selectedAmount <= 120) return 'Provides sports uniform/gi and 1 full month of Jiu-Jitsu or Ballet classes.';
-      if (selectedAmount <= 250) return 'Provides a full staple food basket for the family of an assisted child.';
+      if (selectedAmount <= 300) return 'Comprehensive full monthly care for 1 child: daily meals, workshops & family support.';
       return 'Directly funds daily nutritious meals and educational workshops in Manaus.';
     } else {
-      if (selectedAmount <= 20) return 'Garante lanches saudáveis e frutas frescas para 1 criança por 1 semana.';
-      if (selectedAmount <= 50) return 'Garante material escolar completo, livros e apostilas de reforço.';
-      if (selectedAmount <= 120) return 'Garante kimono/uniforme e 1 mês completo de aulas de Jiu-Jitsu ou Balé.';
-      if (selectedAmount <= 250) return 'Garante cesta de alimentos completa para a família de uma criança assistida.';
+      if (selectedAmount <= 30) return 'Almoço e lanches nutritivos com frutas frescas para 1 criança durante uma semana inteira.';
+      if (selectedAmount <= 60) return 'Material pedagógico completo, livros e apostilas para aulas de reforço, Inglês e Espanhol.';
+      if (selectedAmount <= 120) return 'Kimono de Jiu-Jitsu, sapatilha de balé, tabuleiros de xadrez e instrução semanal especializada.';
+      if (selectedAmount <= 300) return 'Cuidado integral de uma criança: alimentação diária, todas as oficinas, apoio psicopedagógico e familiar.';
       return 'Garante a manutenção das despesas, alimentação e materiais gerais.';
     }
   });
 </script>
 
 <div id="doar" class="relative w-full max-w-lg bg-white rounded-3xl p-6 sm:p-8 shadow-2xl border border-rose-100/80 transition-all duration-300">
-  <!-- Top Rainbow Subtle Accent Bar -->
+  <!-- Top Rainbow Accent Bar -->
   <div class="absolute -top-1 left-8 right-8 h-1.5 rounded-t-full bg-rainbow-badge"></div>
 
   <!-- Toast Notification (Floating) -->
-  {#if copied}
+  {#if copiedPayload || copiedKey}
     <div class="absolute -top-12 left-1/2 -translate-x-1/2 z-30 flex items-center gap-2 bg-emerald-800 text-white text-xs sm:text-sm font-bold px-4 py-2 rounded-full shadow-xl animate-in slide-in-from-top duration-200">
       <svg class="w-4 h-4 text-emerald-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
       </svg>
-      <span>{lang === 'pt' ? 'Chave PIX copiada para a área de transferência!' : 'PIX Key copied to clipboard!'}</span>
+      <span>
+        {#if copiedPayload}
+          {lang === 'pt' ? `Código PIX Copia e Cola (${formattedAmountStr}) copiado!` : `PIX Copy & Paste code (${formattedAmountStr}) copied!`}
+        {:else}
+          {lang === 'pt' ? 'Chave CNPJ copiada com sucesso!' : 'CNPJ PIX key copied successfully!'}
+        {/if}
+      </span>
     </div>
   {/if}
 
@@ -119,8 +191,8 @@
       <span class="absolute left-3.5 text-xs font-bold text-slate-400">R$</span>
       <input
         type="text"
-        inputmode="numeric"
-        placeholder={lang === 'pt' ? 'Ou digite outro valor desejado...' : 'Or enter custom amount in BRL...'}
+        inputmode="decimal"
+        placeholder={lang === 'pt' ? 'Ou digite outro valor (ex: 75,00)...' : 'Or enter custom amount (ex: 75.00)...'}
         value={customAmount}
         oninput={handleCustomInput}
         class="w-full pl-10 pr-4 py-2.5 text-sm font-semibold text-slate-900 bg-slate-50 border-2 rounded-2xl transition-all duration-200 outline-none
@@ -144,7 +216,7 @@
     </div>
   </div>
 
-  <!-- PIX Key Box with 1-Click Copy Action -->
+  <!-- PIX Key Box with Copy Action -->
   <div class="p-3.5 bg-slate-50 border border-slate-200/80 rounded-2xl mb-4">
     <div class="flex items-center justify-between text-xs text-slate-500 mb-1 font-medium">
       <span>{lang === 'pt' ? 'Chave PIX Oficial (CNPJ):' : 'Official PIX Key (CNPJ):'}</span>
@@ -157,26 +229,33 @@
       <span class="font-mono font-bold text-sm sm:text-base text-slate-900 tracking-wide select-all">
         {pixKeyFormatted}
       </span>
+      <button
+        type="button"
+        onclick={copyPixKeyOnly}
+        class="text-xs font-bold text-rose-800 hover:text-rose-950 bg-rose-50 hover:bg-rose-100 px-2.5 py-1 rounded-lg border border-rose-200/60 transition-colors shrink-0 cursor-pointer"
+      >
+        {copiedKey ? (lang === 'pt' ? 'Copiada!' : 'Copied!') : (lang === 'pt' ? 'Copiar CNPJ' : 'Copy CNPJ')}
+      </button>
     </div>
   </div>
 
-  <!-- Primary CTAs (Copy & QR Code Modal) -->
+  <!-- Primary CTAs (Copy PIX Copia e Cola with dynamic value & QR Code Modal) -->
   <div class="space-y-2.5">
     <button
       type="button"
-      onclick={copyPixKey}
+      onclick={copyPixPayload}
       class="w-full flex items-center justify-center gap-2.5 py-4 px-6 bg-gradient-to-r from-amber-500 via-amber-400 to-amber-500 hover:from-amber-400 hover:to-amber-500 text-slate-950 font-black text-base rounded-2xl shadow-lg hover:shadow-xl active:scale-[0.99] transition-all duration-200 cursor-pointer"
     >
-      {#if copied}
+      {#if copiedPayload}
         <svg class="w-5 h-5 text-emerald-950" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
         </svg>
-        <span>{lang === 'pt' ? 'Chave PIX Copiada!' : 'PIX Key Copied!'}</span>
+        <span>{lang === 'pt' ? 'Código PIX Copiado!' : 'PIX Code Copied!'}</span>
       {:else}
         <svg class="w-5 h-5 text-slate-950" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z" />
         </svg>
-        <span>{lang === 'pt' ? 'Copiar Chave PIX (1 Clique)' : 'Copy PIX Key (1 Click)'}</span>
+        <span>{lang === 'pt' ? `Copiar PIX Copia e Cola (${formattedAmountStr})` : `Copy PIX Code (${formattedAmountStr})`}</span>
       {/if}
     </button>
 
@@ -188,7 +267,7 @@
       <svg class="w-4 h-4 text-rose-800" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
       </svg>
-      <span>{lang === 'pt' ? 'Pagar com QR Code PIX' : 'Pay with QR Code'}</span>
+      <span>{lang === 'pt' ? `Gerar QR Code PIX (${formattedAmountStr})` : `Generate QR Code (${formattedAmountStr})`}</span>
     </button>
   </div>
 
