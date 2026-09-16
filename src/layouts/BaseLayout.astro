@@ -13,36 +13,37 @@ interface Props {
 const {
   lang = 'pt',
   title = lang === 'pt'
-    ? 'Casa dos Filhos | Doe para Crianças em Manaus/AM'
-    : 'Casa dos Filhos | Support Children in Manaus, Amazon',
+    ? 'Casa dos Filhos | Apoie Crianças Carentes em Manaus'
+    : 'Casa dos Filhos | Support Children in Manaus, Brazil',
   description = lang === 'pt'
-    ? 'Doe para a Casa dos Filhos em Manaus/AM e transforme vidas de crianças através de educação, esporte, alimentação saudável e acolhimento diário.'
-    : 'Support Casa dos Filhos in Manaus, Brazil. Transform children\'s lives through education, sports, nutrition, and loving daily care.',
-  canonicalUrl = `https://casa-dos-filhos.netlify.app/${lang}/`
+    ? 'Doe para a Casa dos Filhos em Manaus e transforme vidas através de educação, esporte e acolhimento.'
+    : "Support Casa dos Filhos in Manaus, Brazil. Transform children's lives through education and sports.",
 } = Astro.props;
 
-const siteUrl = 'https://casa-dos-filhos.netlify.app';
+const siteUrl = 'https://casadosfilhos.com';
+
+// Auto-referent canonical URL derived from current request
+const canonicalUrl = `${siteUrl}${Astro.url.pathname}`;
 const ogImage = `${siteUrl}/images/hero-kids.webp`;
 
 const jsonLd = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["NGO", "LocalBusiness", "NonprofitOrganization"],
+      "@type": ["NGO", "NonprofitOrganization"],
       "@id": `${siteUrl}/#organization`,
       "name": "Casa dos Filhos",
       "alternateName": "@casadosfilhos",
       "legalName": "CASA DOS FILHOS",
       "taxID": "50.842.391/0001-60",
-      "url": `${siteUrl}/pt/`,
+      "url": siteUrl,
       "logo": `${siteUrl}/favicon.svg`,
       "image": ogImage,
-      "description": description,
+      "description": lang === 'pt'
+        ? 'ONG em Manaus/AM acolhendo crianças em vulnerabilidade social através de educação, esportes, nutrição e apoio sociofamiliar.'
+        : 'NGO in Manaus, Brazil supporting vulnerable children through education, sports, nutrition, and family support.',
       "telephone": "+55-92-99176-4615",
       "email": "contato@casadosfilhos.org",
-      "priceRange": "$",
-      "currenciesAccepted": "BRL, USD, EUR",
-      "paymentAccepted": "PIX, Direct Bank Transfer (Sicoob)",
       "openingHours": "Mo-Fr 08:00-17:00",
       "address": {
         "@type": "PostalAddress",
@@ -67,18 +68,106 @@ const jsonLd = {
       },
       "sameAs": [
         "https://www.instagram.com/casadosfilhos/",
+        "https://www.facebook.com/casadosfilhos?locale=pt_BR",
         "https://wa.me/5592991764615"
       ]
     },
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
-      "url": `${siteUrl}/pt/`,
+      "url": siteUrl,
       "name": "Casa dos Filhos",
       "publisher": {
         "@id": `${siteUrl}/#organization`
       },
       "inLanguage": ["pt-BR", "en-US"]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${siteUrl}/${lang}/#faqpage`,
+      "mainEntity": lang === 'pt' ? [
+        {
+          "@type": "Question",
+          "name": "Quem é a Casa dos Filhos e qual é a sua missão em Manaus?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A Casa dos Filhos é uma organização da sociedade civil (ONG) sem fins lucrativos, inscrita no CNPJ 50.842.391/0001-60, sediada na Zona Norte de Manaus (AM). Nossa missão é acolher, educar e transformar a vida de crianças e famílias em situação de vulnerabilidade social, oferecendo um espaço seguro no contraturno escolar com acompanhamento pedagógico, esportes, alimentação e apoio familiar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Quais são os projetos e atividades oferecidos para as crianças?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Oferecemos quatro eixos principais de atuação: (1) Esporte e Disciplina — aulas gratuitas de Jiu-Jitsu e Balé Clássico; (2) Educação e Idiomas — reforço escolar, alfabetização e introdução ao Inglês e Espanhol; (3) Desenvolvimento Cognitivo — oficinas de xadrez, contação de histórias e formação ética; (4) Segurança Alimentar — mais de 1.200 refeições balanceadas servidas mensalmente e distribuição de cestas básicas."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como posso doar para a Casa dos Filhos via PIX ou transferência?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Você pode fazer uma doação direta usando a chave PIX oficial (CNPJ): 50.842.391/0001-60. Também aceitamos transferências bancárias para o Banco Sicoob (Código 756), Agência 3315, Conta Corrente 34221-1, em nome de CASA DOS FILHOS. 100% do valor vai diretamente para o atendimento e alimentação das crianças em Manaus."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Onde fica a sede em Manaus e como posso visitar ou ser voluntário?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nossa sede está localizada na Zona Norte de Manaus, Amazonas (CEP 69097-122). O atendimento e as atividades ocorrem de segunda a sexta-feira, das 8h às 17h. Para agendar uma visita, ser voluntário em nossas oficinas ou entregar doações presenciais de alimentos e materiais, entre em contato via WhatsApp no (92) 99176-4615 ou pelo Instagram @casadosfilhos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como os recursos das doações são utilizados?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Todos os recursos arrecadados são aplicados com 100% de transparência nas atividades finalísticas da ONG em Manaus: compra de alimentos para as refeições diárias das crianças, aquisição de materiais didáticos e escolares, kimonos de jiu-jitsu, sapatilhas de balé, manutenção da estrutura física da sede e cestas de emergência para as famílias atendidas."
+          }
+        }
+      ] : [
+        {
+          "@type": "Question",
+          "name": "What is Casa dos Filhos and what is its mission in Manaus?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Casa dos Filhos is a registered non-profit organization (NGO) with Tax ID (CNPJ) 50.842.391/0001-60, located in the North Zone of Manaus, Amazonas, Brazil. Our mission is to welcome, educate, and transform the lives of vulnerable children and families by providing a safe after-school space with academic support, sports, nutrition, and family care."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What programs and projects are offered to the children?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We provide four core pillars: (1) Sports & Discipline — free Brazilian Jiu-Jitsu and Classical Ballet classes; (2) Education & Languages — after-school tutoring, literacy support, and English/Spanish basics; (3) Cognitive Development — chess workshops and character building; (4) Food Security — over 1,200 nutritious meals served monthly and distribution of food baskets to families in need."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I donate to Casa dos Filhos via PIX or bank transfer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can make a direct donation using our official Brazilian PIX key (CNPJ): 50.842.391/0001-60. Direct bank wire transfers are also accepted to Banco Sicoob (Bank Code 756), Agency 3315, Account 34221-1 under the beneficiary name CASA DOS FILHOS. 100% of donations directly fund daily child support in Manaus."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is Casa dos Filhos located and how can I visit or volunteer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our center is located in the North Zone of Manaus, Amazonas, Brazil (ZIP Code 69097-122). Visits are welcome Monday through Friday, 8:00 AM to 5:00 PM. To schedule a visit, volunteer as a teacher or mentor, or deliver physical donations, contact us via WhatsApp at +55 (92) 99176-4615 or Instagram @casadosfilhos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is the donated money used?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "100% of funds raised are allocated with total transparency directly to our core operations in Manaus: purchasing fresh food for daily meals, buying school supplies and textbooks, jiu-jitsu gis, ballet shoes, maintaining facility infrastructure, and providing emergency food parcels for supported families."
+          }
+        }
+      ]
     }
   ]
 };
@@ -88,7 +177,7 @@ const jsonLd = {
 <html lang={lang} class="scroll-smooth">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#BE185D" />
 
@@ -100,7 +189,7 @@ const jsonLd = {
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
 
-    <!-- Primary Meta Tags (Strict 50-60 chars title, 120-160 chars description) -->
+    <!-- Primary Meta Tags (Optimized for Semrush audit) -->
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
@@ -108,9 +197,9 @@ const jsonLd = {
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href={canonicalUrl} />
 
-    <!-- Hreflang Tags (With canonical trailing slash) -->
-    <link rel="alternate" hreflang="pt" href={`${siteUrl}/pt/`} />
-    <link rel="alternate" hreflang="en" href={`${siteUrl}/en/`} />
+    <!-- Hreflang Tags (Self-referencing with BCP 47 codes) -->
+    <link rel="alternate" hreflang="pt-BR" href={`${siteUrl}/pt/`} />
+    <link rel="alternate" hreflang="en-US" href={`${siteUrl}/en/`} />
     <link rel="alternate" hreflang="x-default" href={`${siteUrl}/pt/`} />
 
     <!-- Open Graph / Facebook -->
@@ -144,16 +233,27 @@ const jsonLd = {
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" />
     </noscript>
 
-    <!-- Google tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-48Q8Y6L7Q3"></script>
+    <!-- Google Analytics — deferred via requestIdleCallback to avoid INP/TBT impact -->
     <script is:inline>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-48Q8Y6L7Q3', { 'anonymize_ip': true });
+      function loadGA() {
+        var s = document.createElement('script');
+        s.src = 'https://www.googletagmanager.com/gtag/js?id=G-48Q8Y6L7Q3';
+        s.async = true;
+        document.head.appendChild(s);
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        window.gtag = gtag;
+        gtag('js', new Date());
+        gtag('config', 'G-48Q8Y6L7Q3', { 'anonymize_ip': true });
+      }
+      if ('requestIdleCallback' in window) {
+        requestIdleCallback(loadGA, { timeout: 3000 });
+      } else {
+        setTimeout(loadGA, 2000);
+      }
     </script>
 
-    <!-- Schema.org JSON-LD Structured Data (LocalBusiness + NGO) -->
+    <!-- Schema.org JSON-LD Structured Data (NGO + WebSite) -->
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
   </head>
   <body class="min-h-screen flex flex-col bg-[#FAFAFA] text-slate-900 selection:bg-rose-100 selection:text-rose-900">

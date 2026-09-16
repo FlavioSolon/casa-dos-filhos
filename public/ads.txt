@@ -1,5 +1,5 @@
 # Ads.txt for Casa dos Filhos
-# Website: https://casa-dos-filhos.netlify.app
+# Website: https://casadosfilhos.com
 # Contact: contato@casadosfilhos.org
 # Organization: Casa dos Filhos (CNPJ: 50.842.391/0001-60)
 # As a non-profit organization, we do not sell advertising inventory directly.

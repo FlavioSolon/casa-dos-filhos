@@ -15,7 +15,6 @@
     { qKey: 'faq.q3', aKey: 'faq.a3' },
     { qKey: 'faq.q4', aKey: 'faq.a4' },
     { qKey: 'faq.q5', aKey: 'faq.a5' },
-    { qKey: 'faq.q6', aKey: 'faq.a6' },
   ] as const;
 
   function toggle(index: number) {
@@ -53,16 +52,14 @@
         </span>
       </button>
 
-      {#if isOpen}
-        <div
-          id={`faq-answer-${index}`}
-          role="region"
-          aria-labelledby={`faq-header-${index}`}
-          class="px-5 sm:px-6 pb-6 pt-1 text-slate-600 text-sm sm:text-base leading-relaxed border-t border-slate-100 animate-in fade-in duration-150"
-        >
-          <p>{ui[lang][item.aKey]}</p>
-        </div>
-      {/if}
+      <div
+        id={`faq-answer-${index}`}
+        role="region"
+        aria-labelledby={`faq-header-${index}`}
+        class="px-5 sm:px-6 pb-6 pt-1 text-slate-600 text-sm sm:text-base leading-relaxed border-t border-slate-100 transition-all duration-200 {isOpen ? 'block' : 'hidden'}"
+      >
+        <p>{ui[lang][item.aKey]}</p>
+      </div>
     </div>
   {/each}
 </div>

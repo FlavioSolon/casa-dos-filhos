@@ -1,5 +1,9 @@
 # Canonical domain redirect (www to apex)
-https://www.casa-dos-filhos.netlify.app/* https://casa-dos-filhos.netlify.app/:splat 301!
+https://www.casadosfilhos.com/* https://casadosfilhos.com/:splat 301!
+
+# Legacy Netlify subdomain redirect to new domain
+https://casa-dos-filhos.netlify.app/* https://casadosfilhos.com/:splat 301!
+https://www.casa-dos-filhos.netlify.app/* https://casadosfilhos.com/:splat 301!
 
 # Root path redirect to default Portuguese language with trailing slash
 / /pt/ 301!

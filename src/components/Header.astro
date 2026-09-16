@@ -39,7 +39,7 @@ const t = useTranslations(lang);
 
     <!-- Header Actions (Language Switcher + CTA Button) -->
     <div class="flex items-center gap-3 sm:gap-4">
-      <LanguageSwitcher client:load currentLang={lang} />
+      <LanguageSwitcher client:idle currentLang={lang} />
 
       <a
         href="#doar"
@@ -55,7 +55,7 @@ const t = useTranslations(lang);
       <button
         type="button"
         id="mobile-menu-btn"
-        class="lg:hidden p-2.5 text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors"
+        class="lg:hidden p-3 min-w-[48px] min-h-[48px] flex items-center justify-center text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-xl transition-colors"
         aria-label="Abrir Menu"
       >
         <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -68,12 +68,12 @@ const t = useTranslations(lang);
   <!-- Mobile Drawer Menu -->
   <div id="mobile-menu" class="hidden lg:hidden bg-white/95 backdrop-blur-md border-b border-slate-200 px-6 py-5 shadow-xl animate-in slide-in-from-top duration-200">
     <nav class="flex flex-col gap-4 text-base font-bold text-slate-800">
-      <a href="#sobre" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-rose-900">{t('nav.about')}</a>
-      <a href="#atividades" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-rose-900">{t('nav.activities')}</a>
-      <a href="#impacto" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-rose-900">{t('nav.impact')}</a>
-      <a href="#dados-bancarios" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-rose-900">{t('nav.transparency')}</a>
-      <a href="#galeria" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-rose-900">{t('nav.gallery')}</a>
-      <a href="#faq" class="mobile-nav-link py-2 border-b border-slate-100 hover:text-rose-900">{t('nav.faq')}</a>
+      <a href="#sobre" class="mobile-nav-link py-3 min-h-[48px] flex items-center border-b border-slate-100 hover:text-rose-900">{t('nav.about')}</a>
+      <a href="#atividades" class="mobile-nav-link py-3 min-h-[48px] flex items-center border-b border-slate-100 hover:text-rose-900">{t('nav.activities')}</a>
+      <a href="#impacto" class="mobile-nav-link py-3 min-h-[48px] flex items-center border-b border-slate-100 hover:text-rose-900">{t('nav.impact')}</a>
+      <a href="#dados-bancarios" class="mobile-nav-link py-3 min-h-[48px] flex items-center border-b border-slate-100 hover:text-rose-900">{t('nav.transparency')}</a>
+      <a href="#galeria" class="mobile-nav-link py-3 min-h-[48px] flex items-center border-b border-slate-100 hover:text-rose-900">{t('nav.gallery')}</a>
+      <a href="#faq" class="mobile-nav-link py-3 min-h-[48px] flex items-center border-b border-slate-100 hover:text-rose-900">{t('nav.faq')}</a>
       <a
         href="#doar"
         class="mobile-nav-link flex items-center justify-center gap-2 w-full py-3.5 mt-2 rounded-2xl bg-amber-500 text-slate-950 font-black text-center shadow-md"

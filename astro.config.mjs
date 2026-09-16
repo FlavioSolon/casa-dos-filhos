@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://casa-dos-filhos.netlify.app',
+  site: 'https://casadosfilhos.com',
   trailingSlash: 'always',
   integrations: [
     svelte(),

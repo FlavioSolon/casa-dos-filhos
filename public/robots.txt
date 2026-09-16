@@ -1,9 +1,43 @@
 # Robots.txt for Casa dos Filhos
+# https://casadosfilhos.com
+
 User-agent: *
 Allow: /
 
-# Sitemaps
-Sitemap: https://casa-dos-filhos.netlify.app/sitemap-index.xml
+# AI & Generative Search Engine Crawlers (GEO / AEO)
+User-agent: GPTBot
+Allow: /
 
-# LLM / AI Search Crawlers (GEO - Generative Engine Optimization)
-# https://casa-dos-filhos.netlify.app/llms.txt
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Sitemap oficial
+Sitemap: https://casadosfilhos.com/sitemap-index.xml
+
+# LLMs Knowledge Base (GEO - Generative Engine Optimization)
+# https://casadosfilhos.com/llms.txt
+# https://casadosfilhos.com/llms-full.txt
