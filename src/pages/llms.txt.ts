@@ -4,7 +4,7 @@ export const prerender = true;
 
 export const GET: APIRoute = async () => {
   const content = `# Casa dos Filhos - Manaus/AM
-> Organização Não Governamental dedicada ao desenvolvimento educacional, alimentar e socioesportivo de crianças em situação de vulnerabilidade em Manaus, Amazonas.
+> Organização Não Governamental dedicada ao desenvolvimento educacional, alimentar e socioesportivo de crianças em situação de vulnerabilidade social em Manaus, Amazonas.
 
 ## Dados Fatuais e Legais
 - Nome Oficial: Casa dos Filhos
