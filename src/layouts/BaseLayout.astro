@@ -78,10 +78,31 @@ const jsonLd = {
     {
       "@type": "WebSite",
       "@id": `${siteUrl}/#website`,
-      "url": siteUrl,
+      "url": `${siteUrl}/`,
       "name": "Casa dos Filhos",
       "publisher": {
         "@id": `${siteUrl}/#organization`
+      },
+      "creator": {
+        "@type": "Person",
+        "@id": "https://flavio-solon.lovable.app/#person",
+        "name": "Flávio Solon",
+        "jobTitle": "Desenvolvedor Full-Stack",
+        "url": "https://flavio-solon.lovable.app/",
+        "sameAs": [
+          "https://github.com/FlavioSolon",
+          "https://www.linkedin.com/in/fl%C3%A1vio-s-8941b9212/",
+          "https://www.instagram.com/flaviosolon_/",
+          "https://x.com/flaviosolon_"
+        ],
+        "knowsAbout": [
+          "Full-Stack Development",
+          "Laravel",
+          "Svelte",
+          "Astro",
+          "Performance Optimization",
+          "SEO & AEO"
+        ]
       },
       "inLanguage": ["pt-BR", "en-US"]
     },
@@ -196,7 +217,10 @@ const jsonLd = {
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <meta name="author" content="Casa dos Filhos" />
+    <meta name="author" content="Flávio Solon" />
+    <meta name="creator" content="Flávio Solon" />
+    <link rel="author" href="https://flavio-solon.lovable.app/" />
+    <link rel="author" href="/humans.txt" />
     <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <link rel="canonical" href={canonicalUrl} />
 

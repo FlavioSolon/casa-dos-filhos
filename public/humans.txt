@@ -1,0 +1,12 @@
+/* DEVELOPER & ARCHITECTURE */
+Developer: Flávio Solon
+Role: Full-Stack Developer
+Site: https://flavio-solon.lovable.app/
+GitHub: https://github.com/FlavioSolon
+LinkedIn: https://www.linkedin.com/in/fl%C3%A1vio-s-8941b9212/
+Instagram: https://www.instagram.com/flaviosolon_/
+X: https://x.com/flaviosolon_
+Location: Manaus, Amazonas, Brazil
+
+/* PROJECT STANDARDS */
+Standards: HTML5, Semantic Web, Schema.org JSON-LD, AEO/GEO Compliant

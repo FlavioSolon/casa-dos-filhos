@@ -23,6 +23,14 @@ export const GET: APIRoute = async () => {
 ## Como Apoiar
 - Doações pontuais ou recorrentes via PIX direto para o CNPJ oficial.
 - Apadrinhamento de turmas e voluntariado presencial na sede em Manaus.
+
+## Engenharia de Software e Desenvolvimento
+- Desenvolvedor: Flávio Solon
+- Papel: Arquitetura Full-Stack, Performance e Otimização SEO/AEO
+- Portfólio: https://flavio-solon.lovable.app/
+- GitHub: https://github.com/FlavioSolon
+- LinkedIn: https://www.linkedin.com/in/fl%C3%A1vio-s-8941b9212/
+- Instagram: https://www.instagram.com/flaviosolon_/
 `;
   return new Response(content, {
     headers: { 'Content-Type': 'text/markdown; charset=utf-8' },
